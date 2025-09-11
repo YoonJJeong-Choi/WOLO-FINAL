@@ -1,13 +1,14 @@
-package com.example.demo;
+package com.kh.kh_final;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FinalApplication {
+public class KhFinalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FinalApplication.class, args);
+		
+		SpringApplication.run(KhFinalApplication.class, args);
 	}
 
 }
