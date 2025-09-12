@@ -1,7 +1,9 @@
+import CommonMainLayout from './layouts/common/CommonMainLayout';
+
 function App() {
   return (
     <>
-      <h1>파이널~!</h1>
+      <CommonMainLayout />
     </>
   );
 }
