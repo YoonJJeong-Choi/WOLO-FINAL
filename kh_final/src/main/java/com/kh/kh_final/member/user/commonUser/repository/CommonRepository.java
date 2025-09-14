@@ -8,4 +8,6 @@ public interface CommonRepository extends JpaRepository<CommonEntity,Long> {
 
 
     CommonEntity findByCommonIdAndApproveStateNot(String commonId, ApproveState approveState);
+
+    CommonEntity findByCommonEmail(String email);
 }

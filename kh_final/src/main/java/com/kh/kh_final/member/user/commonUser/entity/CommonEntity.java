@@ -34,10 +34,13 @@ public class CommonEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ApproveState approveState;
+    @Column(nullable = false)
+    private Boolean emailCheck;
 
     public CommonEntity(){
         approveState = ApproveState.WAIT;
         commonJoinDate = LocalDateTime.now();
+        emailCheck = false;
     }
 
     public static CommonEntity from(CommonReqDto reqDto){
@@ -50,5 +53,9 @@ public class CommonEntity {
         commonEntity.commonPhoneNo=reqDto.getCommonPhoneNo();
         commonEntity.commonAddress=reqDto.getCommonAddress();
         return commonEntity;
+    }
+
+    public void checkEmail(){
+        this.emailCheck = true;
     }
 }

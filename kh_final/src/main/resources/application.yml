@@ -1,0 +1,15 @@
+spring:
+  mail:
+    host: smtp.naver.com
+    port: 587
+    username: jhj1776@naver.com
+    password: Y5S5FZNS7QUD
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    auth-code-expiration-millis: 1800000  # 30분
