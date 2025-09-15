@@ -24,6 +24,7 @@ const HeaderInner = styled('div')`
   align-items: center;
   height: 73px;
 `;
+
 const LogoImg = styled('img')`
   width: 120px;
   height: 48px;
