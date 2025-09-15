@@ -1,8 +1,9 @@
-package com.kh.kh_final.member.user.commonUser.controller;
+package com.kh.kh_final.member.user.companyUser.controller;
 
-import com.kh.kh_final.member.user.commonUser.dto.CommonUserReqDto;
 import com.kh.kh_final.member.user.commonUser.dto.CommonUserRespDto;
-import com.kh.kh_final.member.user.commonUser.service.CommonUserService;
+import com.kh.kh_final.member.user.companyUser.dto.CompanyUserReqDto;
+import com.kh.kh_final.member.user.companyUser.dto.CompanyUserRespDto;
+import com.kh.kh_final.member.user.companyUser.service.CompanyUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/common")
 @RequiredArgsConstructor
-public class CommonUserApiController {
-    private final CommonUserService commonService;
+@RequestMapping("api/company")
+public class CompanyUserApiController {
+    private final CompanyUserService companyUserService;
     @PostMapping("join")
-    public ResponseEntity<String> join(@RequestBody CommonUserReqDto reqDto){
-        commonService.join(reqDto);
+    public ResponseEntity<String> join(@RequestBody CompanyUserReqDto reqDto){
+        companyUserService.join(reqDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("회원가입 요청 완료! 입력하신 이메일을 확인하고 인증해주세요!");
@@ -26,7 +27,7 @@ public class CommonUserApiController {
 
     @GetMapping("check")
     public ResponseEntity<String> checkEmail(@RequestParam String email) {
-        commonService.checkEmail(email);
+        companyUserService.checkEmail(email);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("이메일 인증 성공! 관리자 승인 후 회원 가입이 완료됩니다.");
@@ -36,8 +37,8 @@ public class CommonUserApiController {
 
 
     @PostMapping("login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody CommonUserReqDto reqDto){
-        CommonUserRespDto respDto = commonService.login(reqDto);
+    public ResponseEntity<Map<String, Object>> login(@RequestBody CompanyUserReqDto reqDto){
+        CompanyUserRespDto respDto = companyUserService.login(reqDto);
         Map<String, Object> map = new HashMap<>();
         map.put("message","로그인 성공!");
         map.put("data",respDto);
@@ -46,5 +47,4 @@ public class CommonUserApiController {
                 .status(HttpStatus.OK)
                 .body(map);
     }
-
 }
