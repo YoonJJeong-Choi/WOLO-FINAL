@@ -1,7 +1,7 @@
 package com.kh.kh_final.member.user.commonUser.dto;
 
 import com.kh.kh_final.member.user.commonUser.entity.CommonUserEntity;
-import com.kh.kh_final.member.user.commonUser.enums.ApproveState;
+import com.kh.kh_final.member.user.common.enums.ApproveState;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ public class CommonUserRespDto {
     private String commonNickName;
     private String commonName;
     private String commonEmail;
-    private String commonPhoneNo;
+    private String commonPhoneNumber;
     private String commonAddress;
     private LocalDateTime commonJoinDate;
     private LocalDateTime commonUpdateDate;
@@ -24,7 +24,7 @@ public class CommonUserRespDto {
         commonUserRespDto.commonNickName = entity.getCommonNickName();
         commonUserRespDto.commonName = entity.getCommonName();
         commonUserRespDto.commonEmail = entity.getCommonUserEmail();
-        commonUserRespDto.commonPhoneNo = entity.getCommonPhoneNo();
+        commonUserRespDto.commonPhoneNumber = entity.getCommonPhoneNumber();
         commonUserRespDto.commonAddress = entity.getCommonAddress();
         commonUserRespDto.commonJoinDate = entity.getCommonJoinDate();
         commonUserRespDto.commonUpdateDate = entity.getCommonUpdateDate();

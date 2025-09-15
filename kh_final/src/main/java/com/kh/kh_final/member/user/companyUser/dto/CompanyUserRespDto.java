@@ -1,6 +1,6 @@
 package com.kh.kh_final.member.user.companyUser.dto;
 
-import com.kh.kh_final.member.user.commonUser.enums.ApproveState;
+import com.kh.kh_final.member.user.common.enums.ApproveState;
 import com.kh.kh_final.member.user.companyUser.entity.CompanyUserEntity;
 import lombok.Getter;
 

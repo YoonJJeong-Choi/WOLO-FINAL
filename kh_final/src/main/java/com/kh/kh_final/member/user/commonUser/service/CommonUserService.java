@@ -7,7 +7,7 @@ import com.kh.kh_final.member.user.common.service.EmailService;
 import com.kh.kh_final.member.user.commonUser.dto.CommonUserReqDto;
 import com.kh.kh_final.member.user.commonUser.dto.CommonUserRespDto;
 import com.kh.kh_final.member.user.commonUser.entity.CommonUserEntity;
-import com.kh.kh_final.member.user.commonUser.enums.ApproveState;
+import com.kh.kh_final.member.user.common.enums.ApproveState;
 import com.kh.kh_final.member.user.commonUser.repository.CommonUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

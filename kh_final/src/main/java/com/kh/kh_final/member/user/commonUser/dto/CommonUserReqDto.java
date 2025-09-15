@@ -9,6 +9,6 @@ public class CommonUserReqDto {
     private String commonNickName;
     private String commonName;
     private String commonEmail;
-    private String commonPhoneNo;
+    private String commonPhoneNumber;
     private String commonAddress;
 }

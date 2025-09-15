@@ -1,7 +1,6 @@
 package com.kh.kh_final.member.user.companyUser.repository;
 
-import com.kh.kh_final.member.user.commonUser.entity.CommonUserEntity;
-import com.kh.kh_final.member.user.commonUser.enums.ApproveState;
+import com.kh.kh_final.member.user.common.enums.ApproveState;
 import com.kh.kh_final.member.user.companyUser.entity.CompanyUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.kh.kh_final.member.user.commonUser.enums;
+package com.kh.kh_final.member.user.common.enums;
 
 import lombok.Getter;
 

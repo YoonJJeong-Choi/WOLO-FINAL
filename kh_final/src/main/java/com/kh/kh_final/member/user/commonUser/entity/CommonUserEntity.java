@@ -1,7 +1,7 @@
 package com.kh.kh_final.member.user.commonUser.entity;
 
 import com.kh.kh_final.member.user.commonUser.dto.CommonUserReqDto;
-import com.kh.kh_final.member.user.commonUser.enums.ApproveState;
+import com.kh.kh_final.member.user.common.enums.ApproveState;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -25,7 +25,7 @@ public class CommonUserEntity {
     @Column(nullable = false,unique = true)
     private String commonUserEmail;
     @Column(nullable = false)
-    private String commonPhoneNo;
+    private String commonPhoneNumber;
     @Column(nullable = false)
     private String commonAddress;
     @Column(nullable = false)
@@ -50,7 +50,7 @@ public class CommonUserEntity {
         commonUserEntity.commonNickName=reqDto.getCommonNickName();
         commonUserEntity.commonName=reqDto.getCommonName();
         commonUserEntity.commonUserEmail=reqDto.getCommonEmail();
-        commonUserEntity.commonPhoneNo=reqDto.getCommonPhoneNo();
+        commonUserEntity.commonPhoneNumber =reqDto.getCommonPhoneNumber();
         commonUserEntity.commonAddress=reqDto.getCommonAddress();
         return commonUserEntity;
     }

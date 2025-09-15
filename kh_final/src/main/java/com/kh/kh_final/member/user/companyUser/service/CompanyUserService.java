@@ -4,7 +4,7 @@ import com.kh.kh_final.member.user.common.enums.CommonErrorCode;
 import com.kh.kh_final.member.user.common.exception.memberException.CommonUserException;
 import com.kh.kh_final.member.user.common.service.CommonService;
 import com.kh.kh_final.member.user.common.service.EmailService;
-import com.kh.kh_final.member.user.commonUser.enums.ApproveState;
+import com.kh.kh_final.member.user.common.enums.ApproveState;
 import com.kh.kh_final.member.user.companyUser.dto.CompanyUserReqDto;
 import com.kh.kh_final.member.user.companyUser.dto.CompanyUserRespDto;
 import com.kh.kh_final.member.user.companyUser.entity.CompanyUserEntity;
