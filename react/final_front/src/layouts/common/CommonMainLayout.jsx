@@ -3,6 +3,7 @@ import { styled } from '@mui/material';
 import CommonHeader from './header/CommonHeader';
 import Footer from './footer/Footer';
 import { Routes, Route } from 'react-router-dom';
+import About from '../../page/about';
 
 const CommonGrid = styled('div')`
   width: 100%;
@@ -33,6 +34,7 @@ const CommonMainLayout = () => {
           <MainInner>
             <Routes>
               <Route path="/" element={<h1>메인 홈페이지</h1>} />
+              <Route path="/explore/about" element={<About />} />
             </Routes>
           </MainInner>
         </MainWrapper>
