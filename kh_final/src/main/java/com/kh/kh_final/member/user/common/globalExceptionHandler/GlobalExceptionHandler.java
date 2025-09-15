@@ -1,5 +1,6 @@
 package com.kh.kh_final.member.user.common.globalExceptionHandler;
 
+import com.kh.kh_final.member.user.common.dto.EmailRespDto;
 import com.kh.kh_final.member.user.common.dto.ErrorRespDto;
 import com.kh.kh_final.member.user.common.exception.emailException.EmailException;
 import com.kh.kh_final.member.user.common.exception.memberException.CommonUserException;
@@ -18,9 +19,10 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(errorRespDto);
     }
-    @ExceptionHandler(CommonUserException.class)
-    public ResponseEntity<ErrorRespDto> handleEmailException(EmailException exception){
-        ErrorRespDto errorRespDto = new ErrorRespDto(exception.getErrorEmailCode(), exception.getMessage());
+
+    @ExceptionHandler(EmailException.class)
+    public ResponseEntity<EmailRespDto> handleEmailException(EmailException exception){
+        EmailRespDto errorRespDto = new EmailRespDto(exception.getErrorEmailCode(), exception.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(errorRespDto);

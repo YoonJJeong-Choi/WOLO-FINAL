@@ -3,7 +3,7 @@ package com.kh.kh_final.member.user.commonUser.dto;
 import lombok.Getter;
 
 @Getter
-public class CommonReqDto {
+public class CommonUserReqDto {
     private String commonId;
     private String commonPassword;
     private String commonNickName;

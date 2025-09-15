@@ -19,11 +19,12 @@ public class EmailService {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
+            helper.setFrom("jhj1776@naver.com");
             helper.setTo(commonEmail);
             helper.setSubject("[회원가입 인증] 이메일 인증 요청");
             helper.setText(
                     "<p> 회원가입을 완료하려면 아래 링크를 클릭해 주세요!<p> "
-                    + "<a href = '" + link + "'>이메일 인증 완료<a/>", true
+                    + "<a href = '" + link + "'>이메일 인증 완료</a>", true
             );
             mailSender.send(message);
         } catch (MessagingException e) {

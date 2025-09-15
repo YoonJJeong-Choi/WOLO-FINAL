@@ -1,6 +1,6 @@
 package com.kh.kh_final.member.user.commonUser.entity;
 
-import com.kh.kh_final.member.user.commonUser.dto.CommonReqDto;
+import com.kh.kh_final.member.user.commonUser.dto.CommonUserReqDto;
 import com.kh.kh_final.member.user.commonUser.enums.ApproveState;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "common")
 @Getter
-public class CommonEntity {
+public class CommonUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commonUserNo;
-    @Column(nullable = false,unique = false)
+    @Column(nullable = false,unique = true)
     private String commonId;
     @Column(nullable = false)
     private String commonPassword;
@@ -22,8 +22,8 @@ public class CommonEntity {
     private String commonNickName;
     @Column(nullable = false)
     private String commonName;
-    @Column(nullable = false)
-    private String commonEmail;
+    @Column(nullable = false,unique = true)
+    private String commonUserEmail;
     @Column(nullable = false)
     private String commonPhoneNo;
     @Column(nullable = false)
@@ -37,22 +37,22 @@ public class CommonEntity {
     @Column(nullable = false)
     private Boolean emailCheck;
 
-    public CommonEntity(){
+    public CommonUserEntity(){
         approveState = ApproveState.WAIT;
         commonJoinDate = LocalDateTime.now();
         emailCheck = false;
     }
 
-    public static CommonEntity from(CommonReqDto reqDto){
-        CommonEntity commonEntity = new CommonEntity();
-        commonEntity.commonId = reqDto.getCommonId();
-        commonEntity.commonPassword=reqDto.getCommonPassword();
-        commonEntity.commonNickName=reqDto.getCommonNickName();
-        commonEntity.commonName=reqDto.getCommonName();
-        commonEntity.commonEmail=reqDto.getCommonEmail();
-        commonEntity.commonPhoneNo=reqDto.getCommonPhoneNo();
-        commonEntity.commonAddress=reqDto.getCommonAddress();
-        return commonEntity;
+    public static CommonUserEntity from(CommonUserReqDto reqDto){
+        CommonUserEntity commonUserEntity = new CommonUserEntity();
+        commonUserEntity.commonId = reqDto.getCommonId();
+        commonUserEntity.commonPassword=reqDto.getCommonPassword();
+        commonUserEntity.commonNickName=reqDto.getCommonNickName();
+        commonUserEntity.commonName=reqDto.getCommonName();
+        commonUserEntity.commonUserEmail=reqDto.getCommonEmail();
+        commonUserEntity.commonPhoneNo=reqDto.getCommonPhoneNo();
+        commonUserEntity.commonAddress=reqDto.getCommonAddress();
+        return commonUserEntity;
     }
 
     public void checkEmail(){

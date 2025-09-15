@@ -4,11 +4,11 @@ import com.kh.kh_final.member.user.common.enums.CommonErrorCode;
 import com.kh.kh_final.member.user.common.exception.memberException.CommonUserException;
 import com.kh.kh_final.member.user.common.service.CommonService;
 import com.kh.kh_final.member.user.common.service.EmailService;
-import com.kh.kh_final.member.user.commonUser.dto.CommonReqDto;
-import com.kh.kh_final.member.user.commonUser.dto.CommonRespDto;
-import com.kh.kh_final.member.user.commonUser.entity.CommonEntity;
+import com.kh.kh_final.member.user.commonUser.dto.CommonUserReqDto;
+import com.kh.kh_final.member.user.commonUser.dto.CommonUserRespDto;
+import com.kh.kh_final.member.user.commonUser.entity.CommonUserEntity;
 import com.kh.kh_final.member.user.commonUser.enums.ApproveState;
-import com.kh.kh_final.member.user.commonUser.repository.CommonRepository;
+import com.kh.kh_final.member.user.commonUser.repository.CommonUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,48 +17,48 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class CommonUserService {
-    private final CommonRepository commonRepository;
+    private final CommonUserRepository commonUserRepository;
     private final CommonService commonService;
     private final EmailService emailService;
 
-    public void join(CommonReqDto reqDto) {
-        CommonEntity commonEntity = CommonEntity.from(reqDto);
-        commonService.join(commonEntity);
+    public void join(CommonUserReqDto reqDto) {
+        CommonUserEntity commonUserEntity = CommonUserEntity.from(reqDto);
+        commonService.join(commonUserEntity);
 
-        String link = "http://localhost:8080/api/common/check?email=" + commonEntity.getCommonEmail();
-        emailService.sendCheckEmail(commonEntity.getCommonEmail(),link);
+        String link = "http://192.168.20.153:8080/api/common/check?email=" + commonUserEntity.getCommonUserEmail();
+        emailService.sendCheckEmail(commonUserEntity.getCommonUserEmail(),link);
 
     }
 
     public void checkEmail(String email) {
-        CommonEntity commonEntity = commonRepository.findByCommonEmail(email);
-        checkUser(commonEntity);
-        commonEntity.checkEmail();
-        commonRepository.save(commonEntity);
+        CommonUserEntity commonUserEntity = commonUserRepository.findByCommonUserEmail(email);
+        checkUser(commonUserEntity);
+        commonUserEntity.checkEmail();
+        commonUserRepository.save(commonUserEntity);
     }
 
 
-    public CommonRespDto login(CommonReqDto reqDto) {
-        CommonEntity commonEntity = commonRepository.findByCommonIdAndApproveStateNot(reqDto.getCommonId(), ApproveState.DELETE);
-        checkUser(commonEntity);
-        checkPassword(commonEntity,reqDto);
-        return CommonRespDto.from(commonEntity);
+    public CommonUserRespDto login(CommonUserReqDto reqDto) {
+        CommonUserEntity commonUserEntity = commonUserRepository.findByCommonIdAndApproveStateNot(reqDto.getCommonId(), ApproveState.DELETE);
+        checkUser(commonUserEntity);
+        checkPassword(commonUserEntity,reqDto);
+        return CommonUserRespDto.from(commonUserEntity);
     }
 
 
-    private void checkUser(CommonEntity commonEntity) {
-        if(commonEntity==null){
+    private void checkUser(CommonUserEntity commonUserEntity) {
+        if(commonUserEntity ==null){
             throw new CommonUserException(CommonErrorCode.USER_NOT_FOUND);
         }
     }
 
-    private void checkPassword(CommonEntity commonEntity, CommonReqDto reqDto) {
+    private void checkPassword(CommonUserEntity commonUserEntity, CommonUserReqDto reqDto) {
 
         if( reqDto.getCommonPassword() == null || reqDto.getCommonPassword().isBlank()){
             throw new CommonUserException(CommonErrorCode.PASSWORD_EMPTY);
         }
 
-        if(!commonEntity.getCommonPassword().equals(reqDto.getCommonPassword())){
+        if(!commonUserEntity.getCommonPassword().equals(reqDto.getCommonPassword())){
             throw new CommonUserException(CommonErrorCode.PASSWORD_MISSMATCH);
         }
 
