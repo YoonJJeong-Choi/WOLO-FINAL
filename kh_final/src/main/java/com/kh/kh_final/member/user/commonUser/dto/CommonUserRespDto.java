@@ -6,7 +6,6 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-//마이페이지 사용할 때는 필요함 로그인 시도 시 필요 없음
 @Getter
 public class CommonUserRespDto {
     private String commonId;

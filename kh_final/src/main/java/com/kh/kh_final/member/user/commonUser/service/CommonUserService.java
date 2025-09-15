@@ -26,7 +26,7 @@ public class CommonUserService {
         commonService.join(commonUserEntity);
 
         String link = "http://192.168.20.153:8080/api/common/check?email=" + commonUserEntity.getCommonUserEmail();
-        emailService.sendCheckEmail(commonUserEntity.getCommonUserEmail(),link);
+        emailService.sendCheckEmail(commonUserEntity.getCommonUserEmail(), link);
 
     }
 
@@ -41,29 +41,25 @@ public class CommonUserService {
     public CommonUserRespDto login(CommonUserReqDto reqDto) {
         CommonUserEntity commonUserEntity = commonUserRepository.findByCommonIdAndApproveStateNot(reqDto.getCommonId(), ApproveState.DELETE);
         checkUser(commonUserEntity);
-        checkPassword(commonUserEntity,reqDto);
+        checkPassword(commonUserEntity, reqDto);
         return CommonUserRespDto.from(commonUserEntity);
     }
 
 
     private void checkUser(CommonUserEntity commonUserEntity) {
-        if(commonUserEntity ==null){
+        if (commonUserEntity == null) {
             throw new CommonUserException(CommonErrorCode.USER_NOT_FOUND);
         }
     }
 
     private void checkPassword(CommonUserEntity commonUserEntity, CommonUserReqDto reqDto) {
 
-        if( reqDto.getCommonPassword() == null || reqDto.getCommonPassword().isBlank()){
+        if (reqDto.getCommonPassword() == null || reqDto.getCommonPassword().isBlank()) {
             throw new CommonUserException(CommonErrorCode.PASSWORD_EMPTY);
         }
 
-        if(!commonUserEntity.getCommonPassword().equals(reqDto.getCommonPassword())){
+        if (!commonUserEntity.getCommonPassword().equals(reqDto.getCommonPassword())) {
             throw new CommonUserException(CommonErrorCode.PASSWORD_MISSMATCH);
         }
-
-
     }
-
-
 }
