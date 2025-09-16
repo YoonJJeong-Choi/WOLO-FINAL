@@ -10,7 +10,6 @@ import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlin
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
-import logo from '../../../../public/wolo_f0f0f0.png';
 
 const SidebarWrapper = styled('aside')`
   height: 100%;
@@ -174,7 +173,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
   return (
     <SidebarWrapper>
       <SideBarBox isOpen={isOpen}>
-        <LogoImg src={logo} alt="로고" isOpen={isOpen} />
+        <LogoImg src="/wolo_f0f0f0.png" alt="로고" isOpen={isOpen} />
         <ToggleButton onClick={() => setIsOpen(!isOpen)}>
           <MenuIcon />
         </ToggleButton>
