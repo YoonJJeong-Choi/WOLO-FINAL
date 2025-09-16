@@ -44,7 +44,7 @@ const NotifyIcon = styled(NotificationsNoneOutlinedIcon)`
   cursor: pointer;
 
   &:hover {
-    color: #561435;
+    color: #052c65;
   }
 `;
 
@@ -71,7 +71,7 @@ const Avatar = styled('div')`
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #561435;
+  background: #052c65;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -135,19 +135,19 @@ const DropdownItem = styled(Link)`
 `;
 
 const pageTitles = {
-  '/host/dashboard': 'Dashboard',
-  '/host/accommodation': 'Accommodation',
-  '/host/office': 'Office',
-  '/host/activity': 'Activity',
-  '/host/reservation': 'Reservation',
-  '/host/apply': 'Application',
+  '/admin/dashboard': 'Dashboard',
+  '/admin/community': 'Community Management',
+  '/admin/account': 'Account Management',
+  '/admin/reservation': 'Reservation Management',
+  '/admin/product': 'Product Management',
+  '/admin/payment': 'Payment Management',
 };
 
 function handleLogout() {
   console.log('로그아웃');
 }
 
-const HostHeader = () => {
+const AdminHeader = () => {
   const location = useLocation();
 
   const matchedPath = Object.keys(pageTitles).find((path) =>
@@ -160,16 +160,16 @@ const HostHeader = () => {
     <HeaderWrapper>
       <TitleBox>
         <h1>{title}</h1>
-        <span>호스트 전용 페이지</span>
+        <span>관리자 전용 페이지</span>
       </TitleBox>
       <RightBox>
         <NotifyIcon />
         <ProfileWrapper>
           <ProfileBox>
-            <Avatar>H</Avatar>
+            <Avatar>AD</Avatar>
             <UserInfo>
-              <strong>UserId01</strong>
-              <span>Property Host</span>
+              <strong>AdminId01</strong>
+              <span>System Administrator</span>
             </UserInfo>
           </ProfileBox>
           <DropdownMenu className="dropdown">
@@ -184,4 +184,4 @@ const HostHeader = () => {
   );
 };
 
-export default HostHeader;
+export default AdminHeader;

@@ -258,7 +258,7 @@ const HostSidebar = ({ isOpen, setIsOpen }) => {
         <MenuItem
           to="/host/dashboard"
           isOpen={isOpen}
-          active={location.pathname === '/host/dashboard'}
+          active={location.pathname.startsWith('/host/dashboard')}
         >
           <BubbleChartOutlinedIcon />
           <span>대시보드</span>
@@ -277,7 +277,7 @@ const HostSidebar = ({ isOpen, setIsOpen }) => {
               <SubMenu
                 to="/host/accommodation"
                 isOpen={isOpen}
-                active={location.pathname === '/host/accommodation'}
+                active={location.pathname.startsWith('/host/accommodation')}
               >
                 <HotelOutlinedIcon />
                 <span>숙소</span>
@@ -292,7 +292,7 @@ const HostSidebar = ({ isOpen, setIsOpen }) => {
               <SubMenu
                 to="/host/office"
                 isOpen={isOpen}
-                active={location.pathname === '/host/office'}
+                active={location.pathname.startsWith('/host/office')}
               >
                 <BusinessOutlinedIcon />
                 <span>오피스</span>
@@ -307,7 +307,7 @@ const HostSidebar = ({ isOpen, setIsOpen }) => {
               <SubMenu
                 to="/host/activity"
                 isOpen={isOpen}
-                active={location.pathname === '/host/activity'}
+                active={location.pathname.startsWith('/host/activity')}
               >
                 <SportsEsportsOutlinedIcon />
                 <span>액티비티</span>
@@ -319,7 +319,7 @@ const HostSidebar = ({ isOpen, setIsOpen }) => {
         <MenuItem
           to="/host/reservation"
           isOpen={isOpen}
-          active={location.pathname === '/host/reservation'}
+          active={location.pathname.startsWith('/host/reservation')}
         >
           <FlightTakeoffOutlinedIcon />
           <span>예약관리</span>
@@ -328,7 +328,7 @@ const HostSidebar = ({ isOpen, setIsOpen }) => {
         <MenuItem
           to="/host/apply"
           isOpen={isOpen}
-          active={location.pathname === '/host/apply'}
+          active={location.pathname.startsWith('/host/apply')}
         >
           <StorefrontOutlinedIcon />
           <span>예약상품 신청</span>
