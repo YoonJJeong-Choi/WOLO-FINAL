@@ -4,6 +4,7 @@ import CommonHeader from './header/CommonHeader';
 import Footer from './footer/Footer';
 import { Routes, Route } from 'react-router-dom';
 import About from '../../page/about';
+import Region from '../../page/region';
 
 const CommonGrid = styled('div')`
   width: 100%;
@@ -35,6 +36,7 @@ const CommonMainLayout = () => {
             <Routes>
               <Route path="/" element={<h1>메인 홈페이지</h1>} />
               <Route path="/explore/about" element={<About />} />
+              <Route path="/explore/region" element={<Region />} />
             </Routes>
           </MainInner>
         </MainWrapper>

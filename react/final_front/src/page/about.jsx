@@ -300,7 +300,11 @@ const About = () => {
   }, []);
 
   useEffect(() => {
-    const options = { root: null, rootMargin: '-15% 0px -15% 0px', threshold: 0.2 };
+    const options = {
+      root: null,
+      rootMargin: '-15% 0px -15% 0px',
+      threshold: 0.2,
+    };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const isVisible = entry.isIntersecting;
@@ -311,7 +315,6 @@ const About = () => {
         if (entry.target === topTextRef.current) setVisibleTopText(isVisible);
       });
     }, options);
-
     if (cardsRef.current) observer.observe(cardsRef.current);
     if (newSectionRef.current) observer.observe(newSectionRef.current);
     if (finalRef.current) observer.observe(finalRef.current);
@@ -337,7 +340,6 @@ const About = () => {
           <ImageContainer>
             <MainImage
               src={images[selectImageIndex]}
-            
               style={{
                 animation: isTransitioning
                   ? `${slideUpOut} 0.5s cubic-bezier(0.4, 0, 0.2, 1)`
@@ -346,11 +348,9 @@ const About = () => {
             />
             <BackgroundImage1
               src={images[(selectImageIndex + 1) % images.length]}
-              
             />
             <BackgroundImage2
               src={images[(selectImageIndex + 2) % images.length]}
-             
             />
           </ImageContainer>
         </ImageSection>
