@@ -4,6 +4,7 @@ import com.kh.kh_final.member.user.commonUser.dto.CommonUserReqDto;
 import com.kh.kh_final.member.user.common.enums.ApproveState;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -43,10 +44,10 @@ public class CommonUserEntity {
         emailCheck = false;
     }
 
-    public static CommonUserEntity from(CommonUserReqDto reqDto){
+    public static CommonUserEntity from(CommonUserReqDto reqDto, BCryptPasswordEncoder passwordEncoder){
         CommonUserEntity commonUserEntity = new CommonUserEntity();
         commonUserEntity.commonId = reqDto.getCommonId();
-        commonUserEntity.commonPassword=reqDto.getCommonPassword();
+        commonUserEntity.commonPassword=passwordEncoder.encode(reqDto.getCommonPassword());
         commonUserEntity.commonNickName=reqDto.getCommonNickName();
         commonUserEntity.commonName=reqDto.getCommonName();
         commonUserEntity.commonUserEmail=reqDto.getCommonEmail();
