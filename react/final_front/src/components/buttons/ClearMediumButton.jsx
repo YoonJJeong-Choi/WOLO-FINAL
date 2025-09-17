@@ -6,8 +6,8 @@ const ClearMediumStyleButton = styled('button')`
   height: 36px;
   border-radius: 4px;
   background-color: transparent;
-  border: 1px solid ${(props) => props.borderColor || '#6C757D'};
-  color: ${(props) => props.fontColor || '#6C757D'};
+  border: 1px solid ${(props) => props.buttonColor || '#6C757D'};
+  color: ${(props) => props.buttonColor || '#6C757D'};
   font-size: medium;
   line-height: 36px;
   display: flex;
@@ -19,26 +19,14 @@ const ClearMediumStyleButton = styled('button')`
     font-size: 1em;
   }
   &:hover {
-    background-color: ${(props) => props.hoverBorderColor || '#343A40'};
+    background-color: ${(props) => props.buttonColor || '#343A40'};
     color: whitesmoke;
   }
 `;
 
-const ClearMediumButton = ({
-  borderColor,
-  buttonName,
-  hoverBorderColor,
-  fontColor,
-  func,
-  icon,
-}) => {
+const ClearMediumButton = ({ buttonColor, buttonName, func, icon }) => {
   return (
-    <ClearMediumStyleButton
-      borderColor={borderColor}
-      fontColor={fontColor}
-      hoverBorderColor={hoverBorderColor}
-      onClick={func}
-    >
+    <ClearMediumStyleButton buttonColor={buttonColor} onClick={func}>
       {icon}
       {buttonName}
     </ClearMediumStyleButton>
