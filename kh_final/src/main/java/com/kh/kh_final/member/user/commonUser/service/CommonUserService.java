@@ -10,6 +10,7 @@ import com.kh.kh_final.member.user.commonUser.entity.CommonUserEntity;
 import com.kh.kh_final.member.user.common.enums.ApproveState;
 import com.kh.kh_final.member.user.commonUser.repository.CommonUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +21,10 @@ public class CommonUserService {
     private final CommonUserRepository commonUserRepository;
     private final CommonService commonService;
     private final EmailService emailService;
+    private final BCryptPasswordEncoder encoder;
 
     public void join(CommonUserReqDto reqDto) {
-        CommonUserEntity commonUserEntity = CommonUserEntity.from(reqDto);
+        CommonUserEntity commonUserEntity = CommonUserEntity.from(reqDto, encoder);
         commonService.join(commonUserEntity);
 
         String link = "http://192.168.20.153:8080/api/common/check?email=" + commonUserEntity.getCommonUserEmail();
