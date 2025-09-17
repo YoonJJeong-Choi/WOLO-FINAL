@@ -3,8 +3,11 @@ import { styled } from '@mui/material';
 import CommonHeader from './header/CommonHeader';
 import Footer from './footer/Footer';
 import { Routes, Route } from 'react-router-dom';
-import About from '../../page/about';
-import Region from '../../page/region';
+import Region from '../../page/common/explore/region';
+import About from '../../page/common/explore/about';
+import ReservationList from '../../page/common/reservation/ReservationList';
+import Privacy from '../../page/common/info/Privacy';
+import Terms from '../../page/common/info/Terms';
 
 const CommonGrid = styled('div')`
   width: 100%;
@@ -37,6 +40,9 @@ const CommonMainLayout = () => {
               <Route path="/" element={<h1>메인 홈페이지</h1>} />
               <Route path="/explore/about" element={<About />} />
               <Route path="/explore/region" element={<Region />} />
+              <Route path="/reservation/list" element={<ReservationList />} />
+              <Route path="/info/privacy" element={<Privacy />} />
+              <Route path="/info/terms" element={<Terms />} />
             </Routes>
           </MainInner>
         </MainWrapper>

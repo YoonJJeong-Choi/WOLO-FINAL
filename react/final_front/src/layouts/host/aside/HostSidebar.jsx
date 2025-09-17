@@ -13,8 +13,6 @@ import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
 import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
 import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
 
-import logo from '../../../../public/wolo_f0f0f0.png';
-
 const SidebarWrapper = styled('aside')`
   height: 100%;
   background-color: #561435;
@@ -248,7 +246,7 @@ const HostSidebar = ({ isOpen, setIsOpen }) => {
   return (
     <SidebarWrapper>
       <SideBarBox isOpen={isOpen}>
-        <LogoImg src={logo} alt="로고" isOpen={isOpen} />
+        <LogoImg src="/wolo_f0f0f0.png" alt="로고" isOpen={isOpen} />
         <ToggleButton onClick={() => setIsOpen(!isOpen)}>
           <MenuIcon />
         </ToggleButton>

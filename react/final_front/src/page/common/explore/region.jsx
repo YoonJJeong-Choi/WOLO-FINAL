@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { styled, Box } from '@mui/material';
-import LargeButton from '../components/buttons/LargeButton';
+import LargeButton from '../../../components/buttons/LargeButton';
 
 const PageWrap = styled(Box)`
   width: 100%;
@@ -360,11 +360,11 @@ const Region = () => {
     <PageWrap>
       <LeftColumn>
         <FilterBar>
-          <label htmlFor='sido-select' style={{ display: 'none' }}>
+          <label htmlFor="sido-select" style={{ display: 'none' }}>
             시도 선택
           </label>
           <Select
-            id='sido-select'
+            id="sido-select"
             value={sido}
             onChange={(e) => {
               setSido(e.target.value);
@@ -378,15 +378,15 @@ const Region = () => {
             ))}
           </Select>
 
-          <label htmlFor='sigungu-select' style={{ display: 'none' }}>
+          <label htmlFor="sigungu-select" style={{ display: 'none' }}>
             시/군/구 선택
           </label>
           <Select
-            id='sigungu-select'
+            id="sigungu-select"
             value={sigungu}
             onChange={(e) => setSigungu(e.target.value)}
           >
-            <option value=''>시/군/구 선택</option>
+            <option value="">시/군/구 선택</option>
             {currentSigungus.map((name) => (
               <option key={name} value={name}>
                 {name}
@@ -394,18 +394,18 @@ const Region = () => {
             ))}
           </Select>
 
-          <label htmlFor='search-input' style={{ display: 'none' }}>
+          <label htmlFor="search-input" style={{ display: 'none' }}>
             검색어 입력
           </label>
           <SearchInput
-            id='search-input'
-            placeholder='검색어 입력'
+            id="search-input"
+            placeholder="검색어 입력"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />
         </FilterBar>
         <MapInner>
-          <div ref={svgContainerRef} aria-label='한국 지역 지도 SVG' />
+          <div ref={svgContainerRef} aria-label="한국 지역 지도 SVG" />
         </MapInner>
       </LeftColumn>
 
@@ -418,13 +418,13 @@ const Region = () => {
             WOLO 워케이션이 당신의 일상을 바꿉니다.
           </InfoText>
           <InfoThumb
-            src='/about/about2.jpg'
-            alt='Workcation retreat thumbnail'
+            src="/about/about2.jpg"
+            alt="Workcation retreat thumbnail"
           />
           <InfoBody>
             <ButtonRow>
-              <LargeButton buttonName='예약하기' />
-              <LargeButton buttonName='자세히' />
+              <LargeButton buttonName="예약하기" />
+              <LargeButton buttonName="자세히" />
             </ButtonRow>
           </InfoBody>
         </RightPanel>

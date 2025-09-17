@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material';
-import logo from '../../../../public/wolo_logo_290661.png';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
@@ -180,7 +179,7 @@ const CommonHeader = () => {
       <HeaderInner>
         <div>
           <Link to="/">
-            <LogoImg src={logo} alt="로고" />
+            <LogoImg src="/wolo_logo_290661.png" alt="로고" />
           </Link>
         </div>
         <Nav>

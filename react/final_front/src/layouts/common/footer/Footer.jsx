@@ -1,6 +1,5 @@
 import React from 'react';
 import { styled } from '@mui/material';
-import logo from '../../../../public/wolo_f0f0f0.png';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import XIcon from '@mui/icons-material/X';
@@ -151,7 +150,7 @@ const Footer = () => {
         <FooterMainInner>
           <FooterMainInnerBox1>
             <div>
-              <LogoImg src={logo} alt="로고" />
+              <LogoImg src="/wolo_f0f0f0.png" alt="로고" />
             </div>
             <IconsWrapper>
               <YouTubeIcon sx={{ fontSize: 50, color: 'white' }} />
