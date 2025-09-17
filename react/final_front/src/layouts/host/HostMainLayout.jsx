@@ -3,6 +3,13 @@ import HostHeader from './header/HostHeader';
 import HostSidebar from './aside/HostSidebar';
 import { styled } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
+import DashBoard from '../../page/host/HostDashboard';
+import AccommodationList from '../../page/host/accommodation/AccommodationList';
+import HostSubHeader from '../../page/host/accommodation/HostSubHeader';
+import NomalPriceList from '../../page/host/accommodation/NomalPriceInsert';
+import NomalPriceInsert from '../../page/host/accommodation/NomalPriceInsert';
+import SpecialPrice from '../../page/host/accommodation/SpecialPriceList';
+import SpecialPriceList from '../../page/host/accommodation/SpecialPriceList';
 
 const LayoutWrapper = styled('div')`
   width: 100%;
@@ -58,16 +65,27 @@ const HostMainLayout = () => {
         {/* 헤더 */}
         <HostHeader />
       </HeaderWrapper>
+      <HostSubHeader />
+      {/* 호스트 헤더2 */}
       <MainWrapper isOpen={isOpen}>
         <Routes>
-          <Route path="/host/dashboard" element={<h1>대시보드</h1>} />
-          <Route path="/host/accommodation" element={<h1>숙소 관리</h1>} />
-          <Route path="/host/office" element={<h1>오피스 관리</h1>} />
-          <Route path="/host/activity" element={<h1>액티비티 관리</h1>} />
-          <Route path="/host/reservation" element={<h1>예약 관리</h1>} />
-          <Route path="/host/apply" element={<h1>예약상품 신청</h1>} />
-          <Route path="/host/mypage" element={<h1>마이페이지</h1>} />
-          <Route path="*" element={<h1>페이지를 찾을 수 없습니다</h1>} />
+          <Route path='/host/dashboard' element={<DashBoard />} />
+          <Route path='/host/sidebar' element={<HostSubHeader />} />
+          <Route path='/host/accommodation' element={<AccommodationList />} />
+          <Route
+            path='/host/accommodation/nomalprice'
+            element={<NomalPriceInsert />}
+          />
+          <Route
+            path='/host/accommodation/specialprice'
+            element={<SpecialPriceList />}
+          />
+          <Route path='/host/office' element={<h1>오피스 관리</h1>} />
+          <Route path='/host/activity' element={<h1>액티비티 관리</h1>} />
+          <Route path='/host/reservation' element={<h1>예약 관리</h1>} />
+          <Route path='/host/apply' element={<h1>예약상품 신청</h1>} />
+          <Route path='/host/mypage' element={<h1>마이페이지</h1>} />
+          <Route path='*' element={<h1>페이지를 찾을 수 없습니다</h1>} />
         </Routes>
       </MainWrapper>
     </LayoutWrapper>
