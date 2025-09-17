@@ -6,8 +6,8 @@ const ClearSmallStyleButton = styled('button')`
   height: 29px;
   border-radius: 4px;
   background-color: transparent;
-  border: 1px solid ${(props) => props.borderColor || '#6C757D'};
-  color: ${(props) => props.fontColor || '#6C757D'};
+  border: 1px solid ${(props) => props.buttonColor || '#6C757D'};
+  color: ${(props) => props.buttonColor || '#6C757D'};
   font-size: small;
   line-height: 29px;
   display: flex;
@@ -19,31 +19,17 @@ const ClearSmallStyleButton = styled('button')`
     font-size: 1em;
   }
   &:hover {
-    background-color: ${(props) => props.hoverBorderColor || '#343A40'};
+    background-color: ${(props) => props.buttonColor || '#343A40'};
     color: whitesmoke;
   }
 `;
 
-const ClearSmallButton = ({
-  borderColor,
-  buttonName,
-  hoverBorderColor,
-  fontColor,
-  func,
-  icon,
-}) => {
+const ClearSmallButton = ({ buttonColor, buttonName, func, icon }) => {
   return (
-    <div>
-      <ClearSmallStyleButton
-        borderColor={borderColor}
-        fontColor={fontColor}
-        hoverBorderColor={hoverBorderColor}
-        onClick={func}
-      >
-        {icon}
-        {buttonName}
-      </ClearSmallStyleButton>
-    </div>
+    <ClearSmallStyleButton buttonColor={buttonColor} onClick={func}>
+      {icon}
+      {buttonName}
+    </ClearSmallStyleButton>
   );
 };
 
