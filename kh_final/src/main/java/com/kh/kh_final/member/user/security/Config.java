@@ -56,12 +56,16 @@ public class Config {
         AuthenticationManager authenticationManager = authenticationManager();
 
         CommonUserLoginFilter commonUserLoginFilter = new CommonUserLoginFilter(authenticationManager,jwtUtil);
+        commonUserLoginFilter.setFilterProcessesUrl("/api/common/login");
 //        CompanyUserLoginFilter companyUserLoginFilter = new CompanyUserLoginFilter(authenticationManager,jwtUtil);
+//        CompanyUserLoginFilter.setFilterProcessesUrl("/api/company/login");
+
 //        HostUserLoginFilter hostUserLoginFilter = new HostUserLoginFilter(authenticationManager,jwtUtil);
+//        HostUserLoginFilter.setFilterProcessesUrl("/api/host/login");
 
-        CommonUserJwtFilter CommonUserJwtFilter = new CommonUserJwtFilter(jwtUtil);
+        CommonUserJwtFilter commonUserJwtFilter = new CommonUserJwtFilter(jwtUtil);
 
-        hs.addFilterBefore(CommonUserJwtFilter, CommonUserLoginFilter.class);
+        hs.addFilterBefore(commonUserJwtFilter, CommonUserLoginFilter.class);
 
         hs.addFilterAt(commonUserLoginFilter, UsernamePasswordAuthenticationFilter.class);
 //        hs.addFilterAfter(companyUserLoginFilter,CommonUserLoginFilter.class);
