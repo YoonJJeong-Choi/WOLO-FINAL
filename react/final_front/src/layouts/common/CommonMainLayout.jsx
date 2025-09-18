@@ -9,6 +9,7 @@ import ReservationList from '../../page/common/reservation/ReservationList';
 import Privacy from '../../page/common/info/Privacy';
 import Terms from '../../page/common/info/Terms';
 import ScrollUp from '../../components/util/ScrollUp';
+import Event from '../../page/common/community/event';
 
 const CommonGrid = styled('div')`
   width: 100%;
@@ -39,14 +40,14 @@ const CommonMainLayout = () => {
         <MainWrapper>
           <MainInner>
             <Routes>
-              <Route path='/' element={<h1>메인 홈페이지</h1>} />
+              <Route path="/" element={<h1>메인 홈페이지</h1>} />
 
-              <Route path='/explore/about' element={<About />} />
-              <Route path='/explore/region' element={<Region />} />
-              <Route path='/community/event' element={<Event />} />
-              <Route path='/reservation/list' element={<ReservationList />} />
-              <Route path='/info/privacy' element={<Privacy />} />
-              <Route path='/info/terms' element={<Terms />} />
+              <Route path="/explore/about" element={<About />} />
+              <Route path="/explore/region" element={<Region />} />
+              <Route path="/community/event" element={<Event />} />
+              <Route path="/reservation/list" element={<ReservationList />} />
+              <Route path="/info/privacy" element={<Privacy />} />
+              <Route path="/info/terms" element={<Terms />} />
             </Routes>
           </MainInner>
         </MainWrapper>
