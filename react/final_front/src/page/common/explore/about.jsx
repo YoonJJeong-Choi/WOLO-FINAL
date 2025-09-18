@@ -259,14 +259,87 @@ const FinalTextContainer = styled(Box)`
 `;
 
 const FinalText = styled('img')`
-  width: 60%;
-  max-width: 100%;
-  min-width: 50%;
+  max-width: 550px;
+  min-width: 550px;
   display: block;
   transition: all 0.3s ease;
   position: relative;
   &:hover {
     transform: scale(1.02);
+  }
+`;
+
+const TagSection = styled(Box)`
+  background: linear-gradient(to bottom, #f3f0ff 0%, #f3f0ff 80%, white 100%);
+  padding: 80px 40px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const TagList = styled(Box)`
+  width: 30rem;
+  max-width: 90vw;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 1rem 0;
+  position: relative;
+  padding: 1.5rem 0;
+  overflow: hidden;
+`;
+
+const LoopSlider = styled(Box)`
+  .inner {
+    display: flex;
+    width: fit-content;
+    animation-name: loop;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: ${({ reverse }) => (reverse ? 'reverse' : 'normal')};
+    animation-duration: ${({ duration }) => duration}ms;
+  }
+`;
+
+const TagItem = styled(Box)`
+  display: flex;
+  align-items: center;
+  gap: 0 0.2rem;
+
+  font-size: 0.9rem;
+  background-color: white;
+  border-radius: 0.4rem;
+  padding: 0.7rem 1rem;
+  margin-right: 1rem;
+
+  white-space: nowrap;
+`;
+
+const FadeOverlay = styled(Box)`
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #f3f0ff,
+    transparent 30%,
+    transparent 70%,
+    #f3f0ff
+  );
+  position: absolute;
+  inset: 0;
+`;
+
+// CSS 애니메이션을 위한 글로벌 스타일
+const GlobalStyles = styled('style')`
+  @keyframes loop {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 `;
 
@@ -284,6 +357,28 @@ const About = () => {
   const [visibleFinal, setVisibleFinal] = useState(false);
   const [visibleTopImage, setVisibleTopImage] = useState(false);
   const [visibleTopText, setVisibleTopText] = useState(false);
+
+  const TAGS = [
+    'JAVA',
+    'Css',
+    'VScode',
+    'Intellij',
+    'Oracle',
+    'React',
+    'Next.js',
+    'Gatsby',
+    'UI/UX',
+    'SVG',
+    'animation',
+    'webdev',
+  ];
+  const DURATION = 15000;
+  const ROWS = 5;
+  const TAGS_PER_ROW = 5;
+
+  // 유틸 함수 (무작위 지속시간/태그 순서)
+  const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+  const shuffle = (arr) => [...arr].sort(() => 0.5 - Math.random());
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -459,6 +554,37 @@ const About = () => {
         <FinalText src={Group3} />
         <FinalText src={Group4} />
       </FinalTextContainer>
+
+      <TagSection>
+        <GlobalStyles />
+        <TagList>
+          {[...new Array(ROWS)].map((_, i) => (
+            <LoopSlider
+              key={i}
+              duration={random(DURATION - 5000, DURATION + 5000)}
+              reverse={i % 2}
+            >
+              <div className="inner">
+                {shuffle(TAGS)
+                  .slice(0, TAGS_PER_ROW)
+                  .map((tag) => (
+                    <TagItem key={tag}>
+                      <span>#</span> {tag}
+                    </TagItem>
+                  ))}
+                {shuffle(TAGS)
+                  .slice(0, TAGS_PER_ROW)
+                  .map((tag) => (
+                    <TagItem key={`${tag}-duplicate`}>
+                      <span>#</span> {tag}
+                    </TagItem>
+                  ))}
+              </div>
+            </LoopSlider>
+          ))}
+          <FadeOverlay />
+        </TagList>
+      </TagSection>
     </>
   );
 };
