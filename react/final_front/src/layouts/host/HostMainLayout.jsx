@@ -5,11 +5,9 @@ import { styled } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
 import DashBoard from '../../page/host/HostDashboard';
 import AccommodationList from '../../page/host/accommodation/AccommodationList';
-import HostSubHeader from '../../page/host/accommodation/HostSubHeader';
-import NomalPriceList from '../../page/host/accommodation/NomalPriceInsert';
-import NomalPriceInsert from '../../page/host/accommodation/NomalPriceInsert';
-import SpecialPrice from '../../page/host/accommodation/SpecialPriceList';
+import HostSubHeader from './header/HostSubHeader';
 import SpecialPriceList from '../../page/host/accommodation/SpecialPriceList';
+import NormalPriceInsert from '../../page/host/accommodation/NormalPriceInsert';
 
 const LayoutWrapper = styled('div')`
   width: 100%;
@@ -73,8 +71,8 @@ const HostMainLayout = () => {
           <Route path='/host/sidebar' element={<HostSubHeader />} />
           <Route path='/host/accommodation' element={<AccommodationList />} />
           <Route
-            path='/host/accommodation/nomalprice'
-            element={<NomalPriceInsert />}
+            path='/host/accommodation/normalprice'
+            element={<NormalPriceInsert />}
           />
           <Route
             path='/host/accommodation/specialprice'
