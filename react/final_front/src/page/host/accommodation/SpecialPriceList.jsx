@@ -1,4 +1,4 @@
-import HostSubHeader from './HostSubHeader';
+import HostSubHeader from '../../../layouts/host/header/HostSubHeader';
 
 const SpecialPriceList = () => {
   return (
@@ -6,6 +6,7 @@ const SpecialPriceList = () => {
       <div>
         <HostSubHeader />
         <h1>예외 요금 관리</h1>
+        
       </div>
     </>
   );

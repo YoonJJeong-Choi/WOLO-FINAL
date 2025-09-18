@@ -1,5 +1,8 @@
-import HostSubHeader from './HostSubHeader';
+import HostSubHeader from '../../../layouts/host/header/HostSubHeader';
 import { styled } from '@mui/material/styles';
+import ClearButton from '../../../components/buttons/ClearSmallButton';
+import { ButtonColor } from '../../../components/buttons/ButtonColor';
+import DataTable from '../../../components/table/Table';
 
 const MainDiv = styled('div')`
   background-color: white;
@@ -22,16 +25,22 @@ const StyleTable = styled('table')`
     text-align: center;
   }
 `;
+
+const HorizontalDiv = styled('div')`
+  display: flex;
+`;
+
 const AccommodationList = () => {
   return (
     <>
+      <DataTable />
       <HostSubHeader />
       <h1>숙소리스트</h1>
       <MainDiv>
-        <div>
+        <HorizontalDiv>
           <button>여기 필터링 자리임</button>
-          <button>삭제</button>
-        </div>
+          <ClearButton buttonColor={ButtonColor.host} buttonName={'삭제'} />
+        </HorizontalDiv>
         <StyleTable>
           <thead>
             <tr>
