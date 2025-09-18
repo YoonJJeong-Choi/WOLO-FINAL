@@ -5,11 +5,17 @@ import LargeButton from '../../../components/buttons/LargeButton';
 const PageWrap = styled(Box)`
   width: 100%;
   min-height: 72vh;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
   padding: 56px 0 64px 0;
   background: linear-gradient(180deg, #ffffff 0%, #f5f0ff 60%, #f5f0ff 100%);
+`;
+
+const ContentRow = styled(Box)`
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 32px;
 `;
 
 const LeftColumn = styled(Box)`
@@ -20,32 +26,36 @@ const LeftColumn = styled(Box)`
 
 const FilterBar = styled(Box)`
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
-  justify-content: flex-end;
-  width: 100%;
+  justify-content: flex-start;
+  width: 80%;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
 `;
 
 const Select = styled('select')`
-  height: 30px;
-  padding: 0 8px;
+  height: 28px;
+  padding: 0 6px;
   border: 1px solid #e6e6eb;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #ffffff;
   color: #5a4bb3;
-  font-size: 13px;
-  min-width: 100px;
+  font-size: 12px;
+  min-width: 80px;
+  flex: 1;
 `;
 
 const SearchInput = styled('input')`
-  height: 30px;
-  padding: 0 10px;
+  height: 28px;
+  padding: 0 8px;
   border: 1px solid #e6e6eb;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #ffffff;
   color: #5a4bb3;
-  font-size: 13px;
-  min-width: 100px;
+  font-size: 12px;
+  min-width: 80px;
+  flex: 1;
 `;
 
 const MapInner = styled(Box)`
@@ -358,77 +368,76 @@ const Region = () => {
 
   return (
     <PageWrap>
-      <LeftColumn>
-        <FilterBar>
-          <label htmlFor="sido-select" style={{ display: 'none' }}>
-            시도 선택
-          </label>
-          <Select
-            id="sido-select"
-            value={sido}
-            onChange={(e) => {
-              setSido(e.target.value);
-              setSigungu('');
-            }}
-          >
-            {Object.keys(allRegionData).map((regionName) => (
-              <option key={regionName} value={regionName}>
-                {regionName}
-              </option>
-            ))}
-          </Select>
+      <ContentRow>
+        <LeftColumn>
+          <MapInner>
+            <div ref={svgContainerRef} aria-label="한국 지역 지도 SVG" />
+          </MapInner>
+        </LeftColumn>
 
-          <label htmlFor="sigungu-select" style={{ display: 'none' }}>
-            시/군/구 선택
-          </label>
-          <Select
-            id="sigungu-select"
-            value={sigungu}
-            onChange={(e) => setSigungu(e.target.value)}
-          >
-            <option value="">시/군/구 선택</option>
-            {currentSigungus.map((name) => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </Select>
+        <RightColumn>
+          <RightPanel>
+            <FilterBar>
+              <label htmlFor="sido-select" style={{ display: 'none' }}>
+                시도 선택
+              </label>
+              <Select
+                id="sido-select"
+                value={sido}
+                onChange={(e) => {
+                  setSido(e.target.value);
+                  setSigungu('');
+                }}
+              >
+                {Object.keys(allRegionData).map((regionName) => (
+                  <option key={regionName} value={regionName}>
+                    {regionName}
+                  </option>
+                ))}
+              </Select>
 
-          <label htmlFor="search-input" style={{ display: 'none' }}>
-            검색어 입력
-          </label>
-          <SearchInput
-            id="search-input"
-            placeholder="검색어 입력"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-          />
-        </FilterBar>
-        <MapInner>
-          <div ref={svgContainerRef} aria-label="한국 지역 지도 SVG" />
-        </MapInner>
-      </LeftColumn>
+              <label htmlFor="sigungu-select" style={{ display: 'none' }}>
+                시/군/구 선택
+              </label>
+              <Select
+                id="sigungu-select"
+                value={sigungu}
+                onChange={(e) => setSigungu(e.target.value)}
+              >
+                <option value="">시/군/구 선택</option>
+                {currentSigungus.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </Select>
 
-      <RightColumn>
-        <RightPanel>
-          <InfoTitle>알쓸 WOLO 워케이션</InfoTitle>
-          <InfoText>
-            바쁜 하루 속에서 찾는 작은 여유
-            <br />
-            WOLO 워케이션이 당신의 일상을 바꿉니다.
-          </InfoText>
-          <InfoThumb
-            src="/about/about2.jpg"
-            alt="Workcation retreat thumbnail"
-          />
-          <InfoBody>
-            <ButtonRow>
-              <LargeButton buttonName="예약하기" />
-              <LargeButton buttonName="자세히" />
-            </ButtonRow>
-          </InfoBody>
-        </RightPanel>
-      </RightColumn>
+              <label htmlFor="search-input" style={{ display: 'none' }}>
+                검색어 입력
+              </label>
+              <SearchInput
+                id="search-input"
+                placeholder="검색어 입력"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+              />
+            </FilterBar>
+            <InfoTitle> WOLO 워케이션</InfoTitle>
+            <InfoText>
+              바쁜 하루 속에서 찾는 작은 여유
+              <br />
+              WOLO 워케이션이 당신의 일상을 바꿉니다.
+            </InfoText>
+            <InfoThumb src="/region/region1.jpg" />
+            <InfoBody>
+              <ButtonRow>
+                <LargeButton buttonName="예약하기" />
+                <LargeButton buttonName="자세히" />
+              </ButtonRow>
+            </InfoBody>
+          </RightPanel>
+        </RightColumn>
+      </ContentRow>
     </PageWrap>
   );
 };
