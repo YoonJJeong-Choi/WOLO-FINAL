@@ -14,12 +14,7 @@ const InputStyled = styled(TextField)`
     border-color: ${(props) => props.color || '#6C757D'};
   }
 `;
-export default function StateTextFields({
-  color,
-  labelName,
-  id,
-  defaultValue,
-}) {
+export default function MediumInput({ color, labelName, id, defaultValue }) {
   const [name, setName] = React.useState(defaultValue);
 
   return (

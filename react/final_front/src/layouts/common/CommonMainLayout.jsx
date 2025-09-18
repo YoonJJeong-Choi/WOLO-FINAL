@@ -8,7 +8,6 @@ import About from '../../page/common/explore/about';
 import ReservationList from '../../page/common/reservation/ReservationList';
 import Privacy from '../../page/common/info/Privacy';
 import Terms from '../../page/common/info/Terms';
-import Event from '../../page/common/community/event';
 
 const CommonGrid = styled('div')`
   width: 100%;
@@ -34,6 +33,7 @@ const CommonMainLayout = () => {
   return (
     <>
       <CommonGrid>
+        <ScrollUp />
         <CommonHeader />
         <MainWrapper>
           <MainInner>
