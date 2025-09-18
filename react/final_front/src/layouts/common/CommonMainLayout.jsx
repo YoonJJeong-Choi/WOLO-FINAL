@@ -6,9 +6,11 @@ import { Routes, Route } from 'react-router-dom';
 import Region from '../../page/common/explore/region';
 import About from '../../page/common/explore/about';
 import ReservationList from '../../page/common/reservation/ReservationList';
+import ReservationProduct from '../../page/common/reservation/ReservationProduct';
 import Privacy from '../../page/common/info/Privacy';
 import Terms from '../../page/common/info/Terms';
 import ScrollUp from '../../components/util/ScrollUp';
+import NumericIdGuard from '../../components/util/NumericIdGuard';
 
 const CommonGrid = styled('div')`
   width: 100%;
@@ -43,6 +45,14 @@ const CommonMainLayout = () => {
               <Route path="/explore/about" element={<About />} />
               <Route path="/explore/region" element={<Region />} />
               <Route path="/reservation/list" element={<ReservationList />} />
+              <Route
+                path="/reservation/list/:id"
+                element={
+                  <NumericIdGuard>
+                    <ReservationProduct />
+                  </NumericIdGuard>
+                }
+              />
               <Route path="/info/privacy" element={<Privacy />} />
               <Route path="/info/terms" element={<Terms />} />
             </Routes>
