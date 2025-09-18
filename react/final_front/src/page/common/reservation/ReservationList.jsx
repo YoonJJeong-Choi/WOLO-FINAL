@@ -14,51 +14,17 @@ import Divider from '@mui/material/Divider';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import Rating from '@mui/material/Rating';
 import GridViewIcon from '@mui/icons-material/GridView';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import ProductGrid from './reservation-list-page/ProductGrid';
+import FilterPanel from './reservation-list-page/FilterPanel';
 
 const Page = styled('div')`
   width: 100%;
   padding: 48px 0px;
   box-sizing: border-box;
 `;
-
-const TopBar = styled('div')`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
-const TabGroup = styled('div')`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  & > div {
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-`;
-
-const Grid = styled('div')`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 720px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
 const SectionTitle = styled('div')`
   display: flex;
   align-items: center;
@@ -68,105 +34,10 @@ const SectionTitle = styled('div')`
   margin: 32px 0 16px;
   color: #222;
 `;
-
-const Card = styled('div')`
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 14px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: box-shadow 0.2s;
-  &:hover {
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.36);
-  }
-`;
-
-const ImgBox = styled('div')`
-  position: relative;
-  width: 100%;
-  padding-top: 62%;
-  overflow: hidden;
-
-  & img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const CardBody = styled('div')`
-  padding: 14px 16px 16px;
-`;
-
-const LocationText = styled('div')`
-  font-size: 12px;
-  color: #7a7a7a;
-  margin-bottom: 4px;
-`;
-
-const Title = styled('div')`
-  font-size: 18px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 8px;
-`;
-
-const Price = styled('div')`
-  font-size: 20px;
-  font-weight: 800;
-  color: #4a2db3;
-  margin-bottom: 10px;
-`;
-
-const DiscountPrice = styled('div')`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
-`;
-
-const OriginalPrice = styled('span')`
-  font-size: 14px;
-  color: #999;
-  text-decoration: line-through;
-`;
-
-const FinalPrice = styled('span')`
-  font-size: 20px;
-  font-weight: 800;
-  color: #4a2db3;
-`;
-
-const TagRow = styled('div')`
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  & span {
-    font-size: 12px;
-    font-weight: 600;
-    color: #7a3fe0;
-    background: #f2eaff;
-    padding: 6px 10px;
-    border-radius: 999px;
-  }
-`;
-
-const ThumbBox = styled('div')`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: -4px;
-`;
-
 const FilterWrapper = styled('div')`
   box-sizing: border-box;
   padding: 0px 200px 48px 200px;
 `;
-
 const FilterGroup = styled('div')`
   width: 100%;
   height: 60px;
@@ -175,8 +46,8 @@ const FilterGroup = styled('div')`
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 12px;
+  cursor: pointer;
 `;
-
 const FilterItem = styled('div')`
   width: 100%;
   height: 100%;
@@ -184,30 +55,29 @@ const FilterItem = styled('div')`
   align-items: center;
   justify-content: center;
   gap: 10px;
-  & > span {
-    font-weight: 700;
+`;
+const TopBar = styled('div')`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+const TabGroup = styled('div')`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  & > div {
+    width: fit-content;
+    display: flex;
+    gap: 10px;
   }
 `;
-
-const ReviewBox = styled('div')`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-`;
-
-const ReviewText = styled('span')`
-  font-size: 12px;
-  color: #7a7a7a;
-`;
-
 const SearchGroup = styled('div')`
   display: flex;
   align-items: center;
   gap: 10px;
 `;
-
-const price = (n) => n.toLocaleString('ko-KR') + '원';
 
 function SearchList() {
   console.log('검색버튼 눌름~');
@@ -291,30 +161,99 @@ const ReservationList = () => {
       discount: 80000,
     },
   ]);
-
-  const [category, setCategory] = useState('전체'); // 전체 | 숙소 | 패키지 | 찜목록
+  const price = (n) => n.toLocaleString('ko-KR') + '원';
   const selectOptions = ['최신순', '오래된순', '리뷰 별점순', '리뷰 많은순'];
+  const [category, setCategory] = useState('전체');
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const [filters, setFilters] = useState({
+    regions: ['전국'],
+    checkIn: null,
+    checkOut: null,
+    people: 0,
+  });
+
+  const getRegionSummary = (f) => {
+    const hasCustom =
+      f.regions && f.regions.length > 0 && !f.regions.includes('전국');
+    return {
+      text: hasCustom ? f.regions.join(', ') : '지역 선택',
+      isPlaceholder: !hasCustom,
+    };
+  };
+
+  const getDateSummary = (f) => {
+    const hasBoth = f.checkIn && f.checkOut;
+    return {
+      text: hasBoth ? `${f.checkIn} ~ ${f.checkOut}` : '일정 선택',
+      isPlaceholder: !hasBoth,
+    };
+  };
+
+  const getPeopleSummary = (f) => {
+    const hasPeople = (f.people ?? 0) > 0;
+    return {
+      text: hasPeople ? `${f.people} 명` : '인원 선택',
+      isPlaceholder: !hasPeople,
+    };
+  };
+
+  const { text: regionText, isPlaceholder: isRegionPH } =
+    getRegionSummary(filters);
+  const { text: dateText, isPlaceholder: isDatePH } = getDateSummary(filters);
+  const { text: peopleText, isPlaceholder: isPeoplePH } =
+    getPeopleSummary(filters);
+
+  const summarySx = (isPH) => ({
+    fontWeight: isPH ? 600 : 400,
+    color: '#222',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  });
+
+  const filtered = products.filter((p) => {
+    // 예: 지역 필터
+    const regionOk = filters.regions.includes('전국')
+      ? true
+      : filters.regions.some((r) => p.regionPath.includes(r));
+
+    // 날짜/인원은 실제 재고/가용성 없으니 스킵(백엔드 연동 시 사용)
+    return regionOk;
+  });
 
   return (
     <Page>
       <FilterWrapper>
-        <FilterGroup>
+        <FilterGroup onClick={(e) => setFilterOpen(true)}>
           <FilterItem>
             <SearchOutlinedIcon sx={{ color: '#290661' }} />
-            <span>지역 선택</span>
+            <span style={summarySx(isRegionPH)}>{regionText}</span>
           </FilterItem>
+
           <Divider orientation="vertical" flexItem />
+
           <FilterItem>
             <CalendarMonthOutlinedIcon sx={{ color: '#290661' }} />
-            <span>일정 선택</span>
+            <span style={summarySx(isDatePH)}>{dateText}</span>
           </FilterItem>
+
           <Divider orientation="vertical" flexItem />
+
           <FilterItem>
             <PersonOutlineOutlinedIcon sx={{ color: '#290661' }} />
-            <span>인원 선택</span>
+            <span style={summarySx(isPeoplePH)}>{peopleText}</span>
           </FilterItem>
         </FilterGroup>
       </FilterWrapper>
+
+      <FilterPanel
+        open={filterOpen}
+        onClose={() => setFilterOpen(false)}
+        value={filters}
+        onApply={(next) => setFilters(next)}
+        headerHeight={74}
+      />
 
       <TopBar>
         <TabGroup>
@@ -352,8 +291,18 @@ const ReservationList = () => {
             <TextField
               id="outlined-select-currency"
               select
+              color="user"
               label="정렬 기준"
               defaultValue="최신순"
+              sx={{
+                width: 200,
+                '& .MuiInputBase-root': {
+                  height: 48,
+                },
+                '& .MuiSelect-select': {
+                  padding: '12px 14px',
+                },
+              }}
             >
               {selectOptions.map((option) => (
                 <MenuItem key={option} value={option}>
@@ -365,6 +314,19 @@ const ReservationList = () => {
               id="outlined-basic"
               label="해시태그 검색"
               variant="outlined"
+              color="user"
+              sx={{
+                width: 200,
+                '& .MuiInputBase-root': {
+                  height: 48,
+                },
+                '& .MuiInputLabel-root': {
+                  top: -3,
+                },
+                '& .MuiInputLabel-shrink': {
+                  top: 0,
+                },
+              }}
             />
             <LargeButton
               buttonColor={ButtonColor.user}
@@ -380,87 +342,20 @@ const ReservationList = () => {
       </TopBar>
 
       <SectionTitle>
-        <GridViewIcon />
-        숙소
+        <GridViewIcon /> 숙소
       </SectionTitle>
-      <Grid>
-        {products
-          .filter((p) => p.type === '숙소')
-          .map((p) => (
-            <Card key={p.id}>
-              <ImgBox>
-                <img src={p.img} alt={p.title} />
-              </ImgBox>
-              <CardBody>
-                <ThumbBox>
-                  <LocationText>{p.regionPath}</LocationText>
-                  <FavoriteBorderOutlinedIcon />
-                </ThumbBox>
-                <Title>{p.title}</Title>
-                <Price>{price(p.price)}~</Price>
-                <ReviewBox>
-                  <Rating
-                    value={p.rating}
-                    precision={0.1}
-                    readOnly
-                    size="small"
-                  />
-                  <ReviewText>({p.reviews} reviews)</ReviewText>
-                </ReviewBox>
-                <TagRow>
-                  {p.hashtags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </TagRow>
-              </CardBody>
-            </Card>
-          ))}
-      </Grid>
+      <ProductGrid
+        products={filtered.filter((p) => p.type === '숙소')}
+        price={price}
+      />
 
       <SectionTitle>
-        <GridViewIcon />
-        패키지
+        <GridViewIcon /> 패키지
       </SectionTitle>
-      <Grid>
-        {products
-          .filter((p) => p.type === '패키지')
-          .map((p) => (
-            <Card key={p.id}>
-              <ImgBox>
-                <img src={p.img} alt={p.title} />
-              </ImgBox>
-              <CardBody>
-                <ThumbBox>
-                  <LocationText>{p.regionPath}</LocationText>
-                  <FavoriteBorderOutlinedIcon />
-                </ThumbBox>
-                <Title>{p.title}</Title>
-                {p.discount ? (
-                  <DiscountPrice>
-                    <OriginalPrice>{price(p.price)}</OriginalPrice>
-                    <FinalPrice>{price(p.price - p.discount)}~</FinalPrice>
-                  </DiscountPrice>
-                ) : (
-                  <Price>{price(p.price)}~</Price>
-                )}
-                <ReviewBox>
-                  <Rating
-                    value={p.rating}
-                    precision={0.1}
-                    readOnly
-                    size="small"
-                  />
-                  <ReviewText>({p.reviews} reviews)</ReviewText>
-                </ReviewBox>
-                <TagRow>
-                  {p.hashtags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </TagRow>
-              </CardBody>
-            </Card>
-          ))}
-      </Grid>
+      <ProductGrid
+        products={filtered.filter((p) => p.type === '패키지')}
+        price={price}
+      />
     </Page>
   );
 };
