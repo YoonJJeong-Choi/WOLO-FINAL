@@ -59,7 +59,7 @@ public class CompanyUserService {
         }
 
         if (!companyUserEntity.getCompanyPassword().equals(reqDto.getCompanyPassword())) {
-            throw new CommonUserException(CommonErrorCode.PASSWORD_MISSMATCH);
+            throw new CommonUserException(CommonErrorCode.PASSWORD_MISMATCH);
         }
     }
 }

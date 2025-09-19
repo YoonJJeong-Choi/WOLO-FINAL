@@ -5,9 +5,7 @@ import com.kh.kh_final.member.user.common.exception.memberException.CommonUserEx
 import com.kh.kh_final.member.user.common.service.CommonService;
 import com.kh.kh_final.member.user.common.service.EmailService;
 import com.kh.kh_final.member.user.commonUser.dto.CommonUserReqDto;
-import com.kh.kh_final.member.user.commonUser.dto.CommonUserRespDto;
 import com.kh.kh_final.member.user.commonUser.entity.CommonUserEntity;
-import com.kh.kh_final.member.user.common.enums.ApproveState;
 import com.kh.kh_final.member.user.commonUser.repository.CommonUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,29 +22,20 @@ public class CommonUserService {
     private final BCryptPasswordEncoder encoder;
 
     public void join(CommonUserReqDto reqDto) {
-        CommonUserEntity commonUserEntity = CommonUserEntity.from(reqDto, encoder);
-        commonService.join(commonUserEntity);
+        CommonUserEntity entity = CommonUserEntity.from(reqDto, encoder);
+        commonService.join(entity);
 
-        String link = "http://192.168.20.153:8080/api/common/check?email=" + commonUserEntity.getCommonUserEmail();
-        emailService.sendCheckEmail(commonUserEntity.getCommonUserEmail(), link);
+        String link = "http://192.168.20.153:8080/api/common/check?email=" + entity.getCommonUserEmail();
+        emailService.sendCheckEmail(entity.getCommonUserEmail(), link);
 
     }
 
     public void checkEmail(String email) {
-        CommonUserEntity commonUserEntity = commonUserRepository.findByCommonUserEmail(email);
-        checkUser(commonUserEntity);
-        commonUserEntity.checkEmail();
-        commonUserRepository.save(commonUserEntity);
+        CommonUserEntity entity = commonUserRepository.findByCommonUserEmail(email);
+        checkUser(entity);
+        entity.checkEmail();
+        commonUserRepository.save(entity);
     }
-
-
-    public CommonUserRespDto login(CommonUserReqDto reqDto) {
-        CommonUserEntity commonUserEntity = commonUserRepository.findByCommonIdAndApproveStateNot(reqDto.getCommonId(), ApproveState.DELETE);
-        checkUser(commonUserEntity);
-        checkPassword(commonUserEntity, reqDto);
-        return CommonUserRespDto.from(commonUserEntity);
-    }
-
 
     private void checkUser(CommonUserEntity commonUserEntity) {
         if (commonUserEntity == null) {
@@ -54,14 +43,4 @@ public class CommonUserService {
         }
     }
 
-    private void checkPassword(CommonUserEntity commonUserEntity, CommonUserReqDto reqDto) {
-
-        if (reqDto.getCommonPassword() == null || reqDto.getCommonPassword().isBlank()) {
-            throw new CommonUserException(CommonErrorCode.PASSWORD_EMPTY);
-        }
-
-        if (!commonUserEntity.getCommonPassword().equals(reqDto.getCommonPassword())) {
-            throw new CommonUserException(CommonErrorCode.PASSWORD_MISSMATCH);
-        }
-    }
 }

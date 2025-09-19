@@ -1,15 +1,11 @@
 package com.kh.kh_final.member.user.commonUser.controller;
 
 import com.kh.kh_final.member.user.commonUser.dto.CommonUserReqDto;
-import com.kh.kh_final.member.user.commonUser.dto.CommonUserRespDto;
 import com.kh.kh_final.member.user.commonUser.service.CommonUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("api/common")
@@ -32,19 +28,4 @@ public class CommonUserApiController {
                 .body("이메일 인증 성공! 관리자 승인 후 회원 가입이 완료됩니다.");
 
     }
-
-
-
-    @PostMapping("login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody CommonUserReqDto reqDto){
-        CommonUserRespDto respDto = commonService.login(reqDto);
-        Map<String, Object> map = new HashMap<>();
-        map.put("message","로그인 성공!");
-        map.put("data",respDto);
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(map);
-    }
-
 }

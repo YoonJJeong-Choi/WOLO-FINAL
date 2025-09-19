@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,6 +20,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class Config {
+    private final CommonUserDetailsService commonUserDetailsService;
+//    private final CompanyUserDetailsService companyUserDetailsService;
+//    private final HostUserDetailsService hostUserDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JwtUtil jwtUtil;
 
@@ -31,6 +35,30 @@ public class Config {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public DaoAuthenticationProvider commonUserAuthProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(commonUserDetailsService);
+        provider.setPasswordEncoder(bCryptPasswordEncoder());
+        return provider;
+    }
+
+//    @Bean
+//    public DaoAuthenticationProvider companyUserAuthProvider(){
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setUserDetailsService(companyUserDetailsService);
+//        provider.setPasswordEncoder(bCryptPasswordEncoder());
+//        return provider;
+//    }
+
+//    @Bean
+//    public DaoAuthenticationProvider hostUserAuthProvider(){
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setUserDetailsService(hostUserDetailsService);
+//        provider.setPasswordEncoder(bCryptPasswordEncoder());
+//        return provider;
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity hs) throws Exception {

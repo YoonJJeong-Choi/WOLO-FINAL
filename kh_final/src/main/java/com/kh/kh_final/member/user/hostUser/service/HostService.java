@@ -59,7 +59,7 @@ public class HostService {
         }
 
         if (!hostUserEntity.getHostPassword().equals(reqDto.getHostPassword())) {
-            throw new CommonUserException(CommonErrorCode.PASSWORD_MISSMATCH);
+            throw new CommonUserException(CommonErrorCode.PASSWORD_MISMATCH);
         }
     }
 }
