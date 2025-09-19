@@ -2,6 +2,7 @@ package com.kh.kh_final.member.user.commonUser.dto;
 
 import com.kh.kh_final.member.user.commonUser.entity.CommonUserEntity;
 import com.kh.kh_final.member.user.common.enums.ApproveState;
+import com.kh.kh_final.member.user.security.CommonUserDetails;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -18,17 +19,18 @@ public class CommonUserRespDto {
     private LocalDateTime commonUpdateDate;
     private ApproveState approveState;
 
-    public static CommonUserRespDto from(CommonUserEntity entity) {
+    public static CommonUserRespDto from(CommonUserDetails userDetails) {
         CommonUserRespDto commonUserRespDto = new CommonUserRespDto();
-        commonUserRespDto.commonId = entity.getCommonId();
-        commonUserRespDto.commonNickName = entity.getCommonNickName();
-        commonUserRespDto.commonName = entity.getCommonName();
-        commonUserRespDto.commonEmail = entity.getCommonUserEmail();
-        commonUserRespDto.commonPhoneNumber = entity.getCommonPhoneNumber();
-        commonUserRespDto.commonAddress = entity.getCommonAddress();
-        commonUserRespDto.commonJoinDate = entity.getCommonJoinDate();
-        commonUserRespDto.commonUpdateDate = entity.getCommonUpdateDate();
-        commonUserRespDto.approveState = entity.getApproveState();
+        commonUserRespDto.commonId = userDetails.getCommonId();
+        commonUserRespDto.commonNickName = userDetails.getCommonNickName();
+        commonUserRespDto.commonName = userDetails.getCommonName();
+        commonUserRespDto.commonEmail = userDetails.getCommonUserEmail();
+        commonUserRespDto.commonPhoneNumber = userDetails.getCommonPhoneNumber();
+        commonUserRespDto.commonAddress = userDetails.getCommonAddress();
+        commonUserRespDto.commonJoinDate = userDetails.getCommonJoinDate();
+        commonUserRespDto.commonUpdateDate = userDetails.getCommonUpdateDate();
+        commonUserRespDto.approveState = userDetails.getApproveState();
         return commonUserRespDto;
     }
+
 }
