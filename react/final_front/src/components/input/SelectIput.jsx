@@ -17,20 +17,12 @@ const StyleNumberInput = styled(TextField)`
 `;
 const currencies = [
   {
-    value: 'USD',
-    label: '$',
+    value: 'gugbeeHotel',
+    label: '국비호텔',
   },
   {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
+    value: 'jhHouse',
+    label: '재혁민박',
   },
 ];
 
