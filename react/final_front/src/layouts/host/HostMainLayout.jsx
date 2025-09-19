@@ -11,6 +11,7 @@ import SpecialPriceInsert from '../../page/host/accommodation/SpecialPriceInsert
 import NormalPriceInsert from '../../page/host/accommodation/NormalPriceInsert';
 import SpecialPriceDetail from '../../page/host/accommodation/SpecialPriceDetail';
 import OfficeList from '../../page/host/office/OfficeList';
+import AccommodationDetail from '../../page/host/accommodation/AccommodationDetail';
 
 const LayoutWrapper = styled('div')`
   width: 100%;
@@ -72,6 +73,10 @@ const HostMainLayout = () => {
         <Routes>
           <Route path='/host/dashboard' element={<DashBoard />} />
           <Route path='/host/sidebar' element={<HostSubHeader />} />
+          <Route
+            path='/host/accommodation/detail'
+            element={<AccommodationDetail />}
+          />
           <Route path='/host/accommodation' element={<AccommodationList />} />
           <Route
             path='/host/accommodation/normalprice'

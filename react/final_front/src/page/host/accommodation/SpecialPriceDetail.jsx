@@ -2,7 +2,7 @@ import React from 'react';
 import HostSubHeader from '../../../layouts/host/header/HostSubHeader';
 import MediumInput from '../../../components/input/MediumInput';
 import DateInput from '../../../components/input/DateInput';
-import NumInput from '../../../components/input/NumberInput';
+import NumInput from '../../../components/input/PriceInput';
 import SelectInput from '../../../components/input/SelectIput';
 import { InputColor } from '../../../components/input/InputColor';
 import { styled } from '@mui/material/styles';

@@ -1,6 +1,6 @@
 import HostSubHeader from '../../../layouts/host/header/HostSubHeader';
 import MediumInput from '../../../components/input/MediumInput';
-import NumInput from '../../../components/input/NumberInput';
+import PriceInput from '../../../components/input/PriceInput';
 import SelectInput from '../../../components/input/SelectIput';
 import { InputColor } from '../../../components/input/InputColor';
 import { styled } from '@mui/material/styles';
@@ -118,48 +118,48 @@ const NormalPriceInsert = () => {
             <HorizontalDiv>
               <div>
                 <p>요일별 가격</p>
-                <NumInput
+                <PriceInput
                   labelName={'월 MON'}
                   id={'mon'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'화 TUE'}
                   id={'tue'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'수 WED'}
                   id={'wed'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'목 THU'}
                   id={'thu'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'금 FRI'}
                   id={'fri'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'토 SAT'}
                   id={'sat'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'일 SUN'}
                   id={'sun'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'공휴일 HOLIDAY'}
                   id={'hol'}
                   color={InputColor.host}
                 />
               </div>
-              <NumInput
+              <PriceInput
                 labelName={'전체 입력'}
                 id={'allprice'}
                 color={InputColor.host}
@@ -171,48 +171,48 @@ const NormalPriceInsert = () => {
             <HorizontalDiv>
               <div>
                 <p>1인 추가 요금</p>
-                <NumInput
+                <PriceInput
                   labelName={'월 MON'}
                   id={'mon'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'화 TUE'}
                   id={'tue'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'수 WED'}
                   id={'wed'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'목 THU'}
                   id={'thu'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'금 FRI'}
                   id={'fri'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'토 SAT'}
                   id={'sat'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'일 SUN'}
                   id={'sun'}
                   color={InputColor.host}
                 />
-                <NumInput
+                <PriceInput
                   labelName={'공휴일 HOLIDAY'}
                   id={'hol'}
                   color={InputColor.host}
                 />
               </div>
-              <NumInput
+              <PriceInput
                 labelName={'전체 입력'}
                 id={'allprice'}
                 color={InputColor.host}

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { NumericFormat } from 'react-number-format';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 
@@ -17,7 +16,7 @@ const StyleNumberInput = styled(TextField)`
   }
 `;
 
-export default function NumberInput({ labelName, color }) {
+export default function PriceInput({ labelName, color }) {
   const [values, setValues] = React.useState({
     numberformat: '1000000',
   });
