@@ -1,4 +1,5 @@
 import HostSubHeader from '../../../layouts/host/header/HostSubHeader';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import ClearButton from '../../../components/buttons/ClearSmallButton';
 import { ButtonColor } from '../../../components/buttons/ButtonColor';
@@ -31,9 +32,11 @@ const HorizontalDiv = styled('div')`
 `;
 
 const AccommodationList = () => {
+  const [page, setPage] = useState(1);
+
   return (
     <>
-      <DataTable />
+      <DataTable page={page} onPageChange={setPage} pagesize={5} />
       <HostSubHeader />
       <h1>숙소리스트</h1>
       <MainDiv>
@@ -45,7 +48,7 @@ const AccommodationList = () => {
           <thead>
             <tr>
               <th>
-                <input type='checkbox' name='all' id='all' />
+                <input type="checkbox" name="all" id="all" />
               </th>
               <th>번호</th>
               <th>숙소명</th>
@@ -57,7 +60,7 @@ const AccommodationList = () => {
           <tbody>
             <tr>
               <td>
-                <input type='checkbox' />
+                <input type="checkbox" />
               </td>
               <td>5</td>
               <td>국비호텔</td>
@@ -67,7 +70,7 @@ const AccommodationList = () => {
             </tr>
             <tr>
               <td>
-                <input type='checkbox' />
+                <input type="checkbox" />
               </td>
               <td>5</td>
               <td>국비호텔</td>
@@ -77,7 +80,7 @@ const AccommodationList = () => {
             </tr>
             <tr>
               <td>
-                <input type='checkbox' />
+                <input type="checkbox" />
               </td>
               <td>5</td>
               <td>국비호텔</td>
@@ -87,7 +90,7 @@ const AccommodationList = () => {
             </tr>
             <tr>
               <td>
-                <input type='checkbox' />
+                <input type="checkbox" />
               </td>
               <td>5</td>
               <td>국비호텔</td>
@@ -97,7 +100,7 @@ const AccommodationList = () => {
             </tr>
             <tr>
               <td>
-                <input type='checkbox' />
+                <input type="checkbox" />
               </td>
               <td>5</td>
               <td>국비호텔</td>
