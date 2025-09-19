@@ -41,13 +41,14 @@ const rows = [
 export default function DataTable() {
   return (
     <>
-      <Paper sx={{ height: 400, width: '100%' }}>
+      <Paper sx={{ height: 422, width: '100%' }}>
         <DataGrid
           pagination={false}
           rows={rows}
           columns={columns}
           checkboxSelection
           sx={{ border: 0 }}
+          hideFooter
         />
       </Paper>
       <Stack spacing={2}>
