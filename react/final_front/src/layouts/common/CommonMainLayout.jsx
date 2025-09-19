@@ -10,6 +10,7 @@ import Privacy from '../../page/common/info/Privacy';
 import Terms from '../../page/common/info/Terms';
 import ScrollUp from '../../components/util/ScrollUp';
 import Event from '../../page/common/community/event';
+import Faq from '../../page/common/explore/faq';
 
 const CommonGrid = styled('div')`
   width: 100%;
@@ -44,6 +45,7 @@ const CommonMainLayout = () => {
 
               <Route path="/explore/about" element={<About />} />
               <Route path="/explore/region" element={<Region />} />
+              <Route path="/explore/faq" element={<Faq />} />
               <Route path="/community/event" element={<Event />} />
               <Route path="/reservation/list" element={<ReservationList />} />
               <Route path="/info/privacy" element={<Privacy />} />
