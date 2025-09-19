@@ -2,43 +2,86 @@ import HostSubHeader from '../../../layouts/host/header/HostSubHeader';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Filter from '../../../components/filter/Filter';
-import Toggle from '../../../components/filter/Toggle';
+import StatusToggle from '../../../components/filter/StatusToggle';
 import {
   FilterColor,
+  StatusColor,
   ToggleHoverColor,
 } from '../../../components/filter/FilterColor';
-import ClearButton from '../../../components/buttons/ClearSmallButton';
-import SamllButton from '../../../components/buttons/SmallButton';
+import ClearButton from '../../../components/buttons/ClearMediumButton';
+import SmallButton from '../../../components/buttons/SmallButton';
 import {
   ButtonColor,
   HoverColor,
 } from '../../../components/buttons/ButtonColor';
-import { InputColor } from '../../../components/input/InputColor';
 import DataTable from '../../../components/table/Table';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+
+const columns = [
+  { field: 'no', headerName: '번호', width: 80 },
+  { field: 'accommodationName', headerName: '숙소명', flex: 1 },
+  { field: 'accommodationType', headerName: '숙소 타입', flex: 1 },
+  { field: 'createdAt', headerName: '등록일', flex: 1 },
+  { field: 'status', headerName: '상태', flex: 1 },
+];
+const rows = [
+  {
+    id: 1,
+    no: 1,
+    accommodationName: '홍길동',
+    accommodationType: 'zz',
+    createdAt: '2025-09-19',
+    status: '대기',
+  },
+  {
+    id: 2,
+    no: 2,
+    accommodationName: '임꺽정',
+    accommodationType: 'zz',
+    createdAt: '2025-09-19',
+    status: '대기',
+  },
+  {
+    id: 3,
+    no: 3,
+    accommodationName: '이몽룡',
+    accommodationType: 'zz',
+    createdAt: '2025-09-19',
+    status: '대기',
+  },
+  {
+    id: 4,
+    no: 4,
+    accommodationName: '성춘향',
+    accommodationType: 'zz',
+    createdAt: '2025-09-19',
+    status: '대기',
+  },
+  {
+    id: 5,
+    no: 5,
+    accommodationName: '변학도',
+    accommodationType: 'zz',
+    createdAt: '2025-09-19',
+    status: '대기',
+  },
+  {
+    id: 6,
+    no: 6,
+    accommodationName: '장보고',
+    accommodationType: 'zz',
+    createdAt: '2025-09-19',
+    status: '대기',
+  },
+];
+
 // 메인
 const MainDiv = styled('div')`
   background-color: white;
   border-radius: 5px;
   width: 90%;
 `;
-// 테이블
-const StyleTable = styled('table')`
-  width: 100%;
-  height: 40%;
-  table-layout: fixed;
-  border-collapse: collapse;
 
-  tr {
-    border-bottom: 1px solid #ccc;
-  }
-
-  th,
-  td {
-    height: 60px;
-    text-align: center;
-  }
-`;
 // 가로정렬
 const HorizontalDiv = styled('div')`
   display: flex;
@@ -58,81 +101,19 @@ const AccommodationList = () => {
       <h1>숙소리스트</h1>
       <MainDiv>
         <HorizontalDiv>
-          <SamllButton
-            buttonColor={ButtonColor.host}
-            hoverColor={HoverColor.host}
-            buttonName={'필터'}
-            icon={<FilterAltIcon />}
-          />
-          <button>여기 필터링 자리임</button>
+          <StatusToggle backgroundColor={StatusColor.active} />
           <ClearButton buttonColor={ButtonColor.host} buttonName={'삭제'} />
         </HorizontalDiv>
-        <StyleTable>
-          <thead>
-            <tr>
-              <th>
-                <input type="checkbox" name="all" id="all" />
-              </th>
-              <th>번호</th>
-              <th>숙소명</th>
-              <th>숙소 타입</th>
-              <th>등록일</th>
-              <th>상태</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>5</td>
-              <td>국비호텔</td>
-              <td>호텔</td>
-              <td>2025-09-16</td>
-              <td>대기 </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>5</td>
-              <td>국비호텔</td>
-              <td>호텔</td>
-              <td>2025-09-16</td>
-              <td>대기 </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>5</td>
-              <td>국비호텔</td>
-              <td>호텔</td>
-              <td>2025-09-16</td>
-              <td>대기 </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>5</td>
-              <td>국비호텔</td>
-              <td>호텔</td>
-              <td>2025-09-16</td>
-              <td>대기 </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>5</td>
-              <td>국비호텔</td>
-              <td>호텔</td>
-              <td>2025-09-16</td>
-              <td>대기 </td>
-            </tr>
-          </tbody>
-        </StyleTable>
+        <DataTable
+          columns={columns} // 테이블 컬럼 정의
+          rows={rows} // 전체 데이터
+          page={page} // 현재 페이지 번호
+          pagesize={5} // 한 페이지당 5개씩 보여주기
+          onPageChange={setPage} // 페이지 변경 시 실행 (부모 state 변경)
+          checkboxSelection={false} // 체크박스 컬럼 표시 여부 (false: 안 보임)
+          sx={{ border: '1px solid #ddd' }} // 테이블 스타일
+          paginationProps={{ color: 'primary', shape: 'rounded' }} // 페이지네이션 스타일
+        />
       </MainDiv>
     </>
   );
