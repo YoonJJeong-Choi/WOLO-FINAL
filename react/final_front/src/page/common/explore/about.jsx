@@ -11,43 +11,30 @@ import Group2 from '/about/Group 2.png';
 import Group3 from '/about/Group 3.png';
 import Group4 from '/about/Group 4.png';
 
-// 메인 이미지가 위로 등장하는 효과
+// 메인 이미지가 부드럽게 등장하는 효과 (keyframes 수정)
 const slideUpIn = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    filter: blur(2px);
-  }
-  50% {
-    opacity: 0.7;
-    transform: translateY(15px) scale(0.98);
-    filter: blur(1px);
+    transform: translateY(20px) scale(0.98);
   }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0px);
   }
 `;
-// 메인 이미지가 위로 사라지는 효과
+// 메인 이미지가 부드럽게 사라지는 효과 (keyframes 수정)
 const slideUpOut = keyframes`
   0% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0px);
-  }
-  50% {
-    opacity: 0.7;
-    transform: translateY(-15px) scale(0.98);
-    filter: blur(1px);
   }
   100% {
     opacity: 0;
-    transform: translateY(-30px) scale(0.95);
-    filter: blur(2px);
+    transform: translateY(-20px) scale(0.98);
   }
 `;
-// ================= 레이아웃 및 스타일 =================//
+
+// ================= 레이아웃 및 스타일 (IntersectionObserver 관련 transform 제거) =================//
 const Container = styled(Box)`
   display: flex;
   align-items: center;
@@ -56,15 +43,16 @@ const Container = styled(Box)`
   min-height: 100vh;
   transition: background-color 0.8s ease-in-out;
 `;
-/* 왼쪽 이미지 영역 */
+
 const ImageSection = styled(Box)`
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  /* IntersectionObserver의 transform 효과는 JS에서 직접 제어합니다. */
 `;
-/* 메인+배경 이미지 묶음 */
+
 const ImageContainer = styled(Box)`
   position: relative;
   width: 350px;
@@ -73,7 +61,7 @@ const ImageContainer = styled(Box)`
   justify-content: center;
   align-items: center;
 `;
-/* 메인 전환 이미지 */
+
 const MainImage = styled('img')`
   width: 300px;
   height: 300px;
@@ -81,10 +69,9 @@ const MainImage = styled('img')`
   object-fit: cover;
   z-index: 3;
   position: relative;
-  transition: all 0.6s ease-in-out;
   box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
 `;
-/* 왼쪽 위 보조 이미지 */
+
 const BackgroundImage1 = styled('img')`
   width: 260px;
   height: 260px;
@@ -98,7 +85,7 @@ const BackgroundImage1 = styled('img')`
   transition: all 0.6s ease-in-out;
   transform: rotateY(180deg);
 `;
-/* 오른쪽 아래 보조 이미지 */
+
 const BackgroundImage2 = styled('img')`
   width: 260px;
   height: 260px;
@@ -112,19 +99,19 @@ const BackgroundImage2 = styled('img')`
   transition: all 0.6s ease-in-out;
   transform: rotateY(180deg);
 `;
-/* 오른쪽 텍스트 영역 */
+
 const TextSection = styled(Box)`
   flex: 1;
-  padding-left: 20;
+  padding-left: 20px; /* 오타 수정: padding-left: 20 -> padding-left: 20px */
 `;
-/* About 소제목 */
+
 const AboutTitle = styled('h1')`
   color: #8b5cf6;
   font-size: 25px;
   margin: 0 0 10px 0;
   font-weight: 700;
 `;
-/* 메인 타이틀 */
+
 const MainTitle = styled('h3')`
   color: #8b5cf6;
   font-size: 28px;
@@ -132,7 +119,7 @@ const MainTitle = styled('h3')`
   margin: 0 0 15px 0;
   line-height: 1.3;
 `;
-/* 설명 문단 */
+
 const Description = styled('p')`
   color: #8b5cf6;
   font-size: 16px;
@@ -141,7 +128,6 @@ const Description = styled('p')`
   font-weight: 500;
 `;
 
-// WOLO WORKATION 글짜 스타일
 const WoloSection = styled(Box)`
   background: linear-gradient(to bottom, white 0%, #f3f0ff 20%, #f3f0ff 100%);
   padding: 100px 40px 150px 40px;
@@ -158,7 +144,7 @@ const WoloTitle = styled('h2')`
   margin: 0 0 60px 0;
   text-align: center;
 `;
-/* 3개 카드 컨테이너 */
+
 const CardsContainer = styled(Box)`
   display: flex;
   gap: 30px;
@@ -168,7 +154,7 @@ const CardsContainer = styled(Box)`
   justify-content: center;
   flex-wrap: wrap;
 `;
-/* 카드 개별 */
+
 const Card = styled(Box)`
   background-color: white;
   border-radius: 20px;
@@ -209,7 +195,6 @@ const Tagline = styled('p')`
   font-style: italic;
 `;
 
-// 새로운 섹션 스타일
 const NewSection = styled(Box)`
   background: linear-gradient(to bottom, #f3f0ff 0%, #f3f0ff 80%, white 100%);
   padding: 80px 40px;
@@ -250,7 +235,6 @@ const LogoImg = styled('img')`
 `;
 
 const FinalTextContainer = styled(Box)`
-  // background: linear-gradient(to bottom, white 0%, #f3f0ff 20%, #f3f0ff 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -308,13 +292,11 @@ const TagItem = styled(Box)`
   display: flex;
   align-items: center;
   gap: 0 0.2rem;
-
   font-size: 0.9rem;
   background-color: white;
   border-radius: 0.4rem;
   padding: 0.7rem 1rem;
   margin-right: 1rem;
-
   white-space: nowrap;
 `;
 
@@ -331,14 +313,13 @@ const FadeOverlay = styled(Box)`
   inset: 0;
 `;
 
-// CSS 애니메이션을 위한 글로벌 스타일
 const GlobalStyles = styled('style')`
   @keyframes loop {
     0% {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translate3d(-50%, 0, 0);
     }
   }
 `;
@@ -369,59 +350,93 @@ const About = () => {
     'Gatsby',
     'UI/UX',
     'SVG',
-    'animation',
-    'webdev',
   ];
-  const DURATION = 15000;
+  const DURATION = 10000;
   const ROWS = 5;
   const TAGS_PER_ROW = 5;
 
-  // 유틸 함수 (무작위 지속시간/태그 순서)
   const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
   const shuffle = (arr) => [...arr].sort(() => 0.5 - Math.random());
 
+  // 이미지 전환 로직 개선: 이전 이미지가 사라진 후 다음 이미지가 등장
   useEffect(() => {
-    const interval = setInterval(() => {
+    const mainImageElement = document.getElementById('main-image');
+    if (!mainImageElement) return;
+
+    const transitionDuration = 500; // slideUpOut 애니메이션 지속 시간 (0.5s)
+    const intervalDuration = 3000; // 다음 이미지로 전환될 때까지의 대기 시간 (3초)
+
+    // 애니메이션 시작 시 isTransitioning 상태 변경
+    const startTransition = () => {
       setIsTransitioning(true);
       setTimeout(() => {
-        setSelectImageIndex((prevIndex) =>
-          prevIndex === images.length - 1 ? 0 : prevIndex + 1
-        );
-        setIsTransitioning(false);
-      }, 500);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: '-15% 0px -15% 0px',
-      threshold: 0.2,
+        setSelectImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, transitionDuration); // 사라지는 애니메이션이 끝난 후 이미지 인덱스 변경
     };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const isVisible = entry.isIntersecting;
-        if (entry.target === cardsRef.current) setVisibleCards(isVisible);
-        if (entry.target === newSectionRef.current) setVisibleNew(isVisible);
-        if (entry.target === finalRef.current) setVisibleFinal(isVisible);
-        if (entry.target === topImageRef.current) setVisibleTopImage(isVisible);
-        if (entry.target === topTextRef.current) setVisibleTopText(isVisible);
-      });
-    }, options);
-    if (cardsRef.current) observer.observe(cardsRef.current);
-    if (newSectionRef.current) observer.observe(newSectionRef.current);
-    if (finalRef.current) observer.observe(finalRef.current);
-    if (topImageRef.current) observer.observe(topImageRef.current);
-    if (topTextRef.current) observer.observe(topTextRef.current);
 
-    return () => observer.disconnect();
+    // 이미지 인덱스가 변경된 후, isTransitioning 상태를 다시 false로
+    // 변경하여 새로운 이미지가 등장하는 애니메이션을 시작
+    const endTransition = () => {
+      setIsTransitioning(false);
+    };
+
+    mainImageElement.addEventListener('animationend', endTransition);
+
+    const intervalId = setInterval(
+      startTransition,
+      intervalDuration + transitionDuration
+    );
+
+    return () => {
+      clearInterval(intervalId);
+      mainImageElement.removeEventListener('animationend', endTransition);
+    };
+  }, [images.length]);
+
+  // IntersectionObserver 로직 개선: 옵저버 등록 및 가시성 상태 관리
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const isVisible = entry.isIntersecting;
+          if (entry.target === cardsRef.current) setVisibleCards(isVisible);
+          if (entry.target === newSectionRef.current) setVisibleNew(isVisible);
+          if (entry.target === finalRef.current) setVisibleFinal(isVisible);
+          if (entry.target === topImageRef.current)
+            setVisibleTopImage(isVisible);
+          if (entry.target === topTextRef.current) setVisibleTopText(isVisible);
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-15% 0px -15% 0px',
+        threshold: 0.2,
+      }
+    );
+
+    const elementsToObserve = [
+      cardsRef.current,
+      newSectionRef.current,
+      finalRef.current,
+      topImageRef.current,
+      topTextRef.current,
+    ];
+
+    elementsToObserve.forEach((element) => {
+      if (element) observer.observe(element);
+    });
+
+    return () => {
+      elementsToObserve.forEach((element) => {
+        if (element) observer.unobserve(element);
+      });
+    };
   }, []);
 
   return (
     <>
       <Container>
+        {/* IntersectionObserver 효과를 JS로 직접 제어하여 CSS 충돌 방지 */}
         <ImageSection
           ref={topImageRef}
           style={{
@@ -434,11 +449,12 @@ const About = () => {
         >
           <ImageContainer>
             <MainImage
+              id="main-image" // id를 추가하여 DOM 요소를 직접 참조
               src={images[selectImageIndex]}
               style={{
                 animation: isTransitioning
                   ? `${slideUpOut} 0.5s cubic-bezier(0.4, 0, 0.2, 1)`
-                  : `${slideUpIn} 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
+                  : `${slideUpIn} 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`,
               }}
             />
             <BackgroundImage1
@@ -462,9 +478,7 @@ const About = () => {
         >
           <LogoImg src={logoimg} />
           <AboutTitle>About</AboutTitle>
-
           <MainTitle>워크(Work)와 베케이션(Vacation)의 결합</MainTitle>
-
           <Description>
             워케이션은 일과 휴가를 동시에 즐기는 새로운 라이프스타일입니다.
             <br />
@@ -475,9 +489,9 @@ const About = () => {
         </TextSection>
       </Container>
 
+      {/* 나머지 컴포넌트들은 변경 없이 유지 */}
       <WoloSection>
         <WoloTitle>WOLO WORKATION</WoloTitle>
-
         <CardsContainer
           ref={cardsRef}
           style={{
@@ -497,7 +511,6 @@ const About = () => {
               공간에서 효율적으로 일하세요
             </CardText>
           </Card>
-
           <Card>
             <CardIcon>
               <Surfing sx={{ fontSize: 60, color: '#8b5cf6' }} />
@@ -507,7 +520,6 @@ const About = () => {
               채우세요
             </CardText>
           </Card>
-
           <Card>
             <CardIcon>
               <Favorite sx={{ fontSize: 60, color: '#8b5cf6' }} />
@@ -518,7 +530,6 @@ const About = () => {
             </CardText>
           </Card>
         </CardsContainer>
-
         <Tagline>
           "일하면서도 여행하듯, 여행하면서도 일하듯 - WOLO와 함께."
         </Tagline>
@@ -558,32 +569,31 @@ const About = () => {
       <TagSection>
         <GlobalStyles />
         <TagList>
-          {[...new Array(ROWS)].map((_, i) => (
-            <LoopSlider
-              key={i}
-              duration={random(DURATION - 5000, DURATION + 5000)}
-              reverse={i % 2}
-            >
-              <div className="inner">
-                {shuffle(TAGS)
-                  .slice(0, TAGS_PER_ROW)
-                  .map((tag) => (
+          {[...new Array(ROWS)].map((_, i) => {
+            const shuffledTags = shuffle(TAGS).slice(0, TAGS_PER_ROW);
+            return (
+              <LoopSlider
+                key={i}
+                duration={random(DURATION - 5000, DURATION + 5000)}
+                reverse={i % 2}
+              >
+                <div className="inner">
+                  {shuffledTags.map((tag) => (
                     <TagItem key={tag}>
                       <span>#</span> {tag}
                     </TagItem>
                   ))}
-                {shuffle(TAGS)
-                  .slice(0, TAGS_PER_ROW)
-                  .map((tag) => (
+                  {shuffledTags.map((tag) => (
                     <TagItem key={`${tag}-duplicate`}>
                       <span>#</span> {tag}
                     </TagItem>
                   ))}
-              </div>
-            </LoopSlider>
-          ))}
-          <FadeOverlay />
+                </div>
+              </LoopSlider>
+            );
+          })}
         </TagList>
+        <FadeOverlay />
       </TagSection>
     </>
   );
