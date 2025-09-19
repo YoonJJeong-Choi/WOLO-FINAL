@@ -1,11 +1,16 @@
+import React from 'react';
 import HostSubHeader from '../../../layouts/host/header/HostSubHeader';
 import MediumInput from '../../../components/input/MediumInput';
+import DateInput from '../../../components/input/DateInput';
 import NumInput from '../../../components/input/NumberInput';
 import SelectInput from '../../../components/input/SelectIput';
 import { InputColor } from '../../../components/input/InputColor';
 import { styled } from '@mui/material/styles';
 import LargeButton from '../../../components/buttons/LargeButton';
-import { ButtonColor } from '../../../components/buttons/ButtonColor';
+import {
+  ButtonColor,
+  HoverColor,
+} from '../../../components/buttons/ButtonColor';
 
 const HorizontalDiv = styled('div')`
   display: flex;
@@ -33,6 +38,13 @@ const HorizontalDivThree = styled('div')`
   justify-content: center;
 `;
 
+const HorizontalDivFour = styled('div')`
+  display: flex;
+  /* justify-items: start; */
+  align-items: center;
+  justify-content: flex-start;
+`;
+
 const VerticalDiv = styled('div')`
   display: grid;
 `;
@@ -57,13 +69,14 @@ const ButtonDiv = styled('div')`
   justify-content: flex-end;
   align-items: flex-end;
   margin: 2%;
+  gap: 4%;
 `;
 
-const NormalPriceInsert = () => {
+const SpecialPriceDetail = () => {
   return (
     <>
       <HostSubHeader />
-      <h1>기본 요금 관리</h1>
+      <h1>예외 요금 관리 디테일</h1>
       <MainDiv>
         <VerticalDiv>
           <HorizontalDivThree>
@@ -77,13 +90,27 @@ const NormalPriceInsert = () => {
               labelName={'숙소명'}
               id={'accommodationname'}
               color={InputColor.host}
-            /> */}
+              /> */}
             <LargeButton
               buttonColor={ButtonColor.host}
               hoverColor={ButtonColor.host}
               buttonName={'객실조회'}
             />
           </HorizontalDivThree>
+          <WrapDiv>
+            <HorizontalDivFour>
+              <HorizontalDivThree>
+                <p>등록일</p>
+                <DateInput color={InputColor.host} />
+              </HorizontalDivThree>
+              <HorizontalDivThree>
+                <p>수정일</p>
+                <DateInput color={InputColor.host} />
+              </HorizontalDivThree>
+            </HorizontalDivFour>
+          </WrapDiv>
+          <br />
+
           <WrapDiv>
             <HorizontalDivTwo>
               <HorizontalDiv>
@@ -112,7 +139,24 @@ const NormalPriceInsert = () => {
           </WrapDiv>
         </VerticalDiv>
         <br />
-        {/* 기본 요금  */}
+        <WrapDiv>
+          <HorizontalDivTwo>
+            <MediumInput
+              labelName={'예외 가격 요금명'}
+              color={InputColor.host}
+            />
+            <HorizontalDivThree>
+              <p>시작일</p>
+              <DateInput color={InputColor.host} />
+            </HorizontalDivThree>
+
+            <HorizontalDivThree>
+              <p>종료일</p>
+              <DateInput color={InputColor.host} />
+            </HorizontalDivThree>
+          </HorizontalDivTwo>
+        </WrapDiv>
+        <br />
         <HorizontalDivFive>
           <WrapDiv>
             <HorizontalDiv>
@@ -166,7 +210,7 @@ const NormalPriceInsert = () => {
               />
             </HorizontalDiv>
           </WrapDiv>
-          {/* 1인 추가 요금 */}
+
           <WrapDiv>
             <HorizontalDiv>
               <div>
@@ -223,8 +267,14 @@ const NormalPriceInsert = () => {
         <ButtonDiv>
           <LargeButton
             buttonColor={ButtonColor.host}
-            hoverColor={ButtonColor.host}
+            hoverColor={HoverColor.host}
             buttonName={'수정'}
+          />
+
+          <LargeButton
+            buttonColor={ButtonColor.host}
+            hoverColor={HoverColor.host}
+            buttonName={'취소'}
           />
         </ButtonDiv>
       </MainDiv>
@@ -232,4 +282,4 @@ const NormalPriceInsert = () => {
   );
 };
 
-export default NormalPriceInsert;
+export default SpecialPriceDetail;

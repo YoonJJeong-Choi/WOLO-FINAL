@@ -7,7 +7,10 @@ import DashBoard from '../../page/host/HostDashboard';
 import AccommodationList from '../../page/host/accommodation/AccommodationList';
 import HostSubHeader from './header/HostSubHeader';
 import SpecialPriceList from '../../page/host/accommodation/SpecialPriceList';
+import SpecialPriceInsert from '../../page/host/accommodation/SpecialPriceInsert';
 import NormalPriceInsert from '../../page/host/accommodation/NormalPriceInsert';
+import SpecialPriceDetail from '../../page/host/accommodation/SpecialPriceDetail';
+import OfficeList from '../../page/host/office/OfficeList';
 
 const LayoutWrapper = styled('div')`
   width: 100%;
@@ -78,7 +81,15 @@ const HostMainLayout = () => {
             path='/host/accommodation/specialprice'
             element={<SpecialPriceList />}
           />
-          <Route path='/host/office' element={<h1>오피스 관리</h1>} />
+          <Route
+            path='/host/accommodation/specialprice/insert'
+            element={<SpecialPriceInsert />}
+          />
+          <Route
+            path='/host/accommodation/specialprice/detail'
+            element={<SpecialPriceDetail />}
+          />
+          <Route path='/host/office' element={<OfficeList />} />
           <Route path='/host/activity' element={<h1>액티비티 관리</h1>} />
           <Route path='/host/reservation' element={<h1>예약 관리</h1>} />
           <Route path='/host/apply' element={<h1>예약상품 신청</h1>} />
