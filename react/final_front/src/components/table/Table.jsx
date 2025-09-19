@@ -100,16 +100,16 @@ export default function Table({
     </>
   );
 }
-/* -> 이거 가져가 쓰셈
+/* -> 예시
 // 1) 부모 컴포넌트에서 페이지 상태 만들기
 const [page, setPage] = useState(1);
 
 // 2) 실제 데이터와 컬럼 정의 (예시는 간단히 작성)
-const columns = [
+const columns = [ - 헤드네임
   { field: 'no', headerName: '번호', width: 80 },
   { field: 'name', headerName: '이름', flex: 1 },
 ];
-const rows = [
+const rows = [  
   { id: 1, no: 1, name: '홍길동' },
   { id: 2, no: 2, name: '임꺽정' },
   { id: 3, no: 3, name: '이몽룡' },
