@@ -10,4 +10,10 @@ const ToggleHoverColor = {
   host: '#3B0F27',
 };
 
-export { FilterColor, ToggleHoverColor };
+const StatusColor = {
+  active: '#00C853',
+  inactive: '#9E9E9E',
+  pending: '#FF6D00',
+};
+
+export { FilterColor, ToggleHoverColor, StatusColor };

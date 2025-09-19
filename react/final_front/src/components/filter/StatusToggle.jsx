@@ -2,13 +2,11 @@ import * as React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-export default function Toggle({ backgroundColor, hoverColor }) {
+export default function StatusToggle({ backgroundColor, hoverColor }) {
   const [alignment, setAlignment] = React.useState('createdAt');
 
   const handleChange = (event, newAlignment) => {
-    if (newAlignment !== null) {
-      setAlignment(newAlignment);
-    }
+    setAlignment(newAlignment);
   };
 
   return (
@@ -21,33 +19,39 @@ export default function Toggle({ backgroundColor, hoverColor }) {
       <ToggleButton
         sx={{
           '&.Mui-selected': {
-            backgroundColor,
-            '&:hover': { backgroundColor: hoverColor },
+            backgroundColor: '#00C853',
+            '&:hover': { backgroundColor: '#00E676' },
             color: 'white',
           },
         }}
-        value='createdAt'
+        value='active'
       >
-        등록일
+        활성
       </ToggleButton>
       <ToggleButton
         sx={{
           '&.Mui-selected': {
-            backgroundColor,
-            '&:hover': { backgroundColor: hoverColor },
+            backgroundColor: '#9E9E9E',
+            '&:hover': { backgroundColor: '#BDBDBD' },
             color: 'white',
           },
         }}
-        value='updatedAt'
+        value='inacvie'
       >
-        수정일
+        비활성
+      </ToggleButton>
+      <ToggleButton
+        sx={{
+          '&.Mui-selected': {
+            backgroundColor: '#FF6D00',
+            '&:hover': { backgroundColor: '#FF9100' },
+            color: 'white',
+          },
+        }}
+        value='pending'
+      >
+        대기
       </ToggleButton>
     </ToggleButtonGroup>
   );
 }
-
-// 임포트해서 이런식으로 쓰세요
-// <Toggle
-//             backgroundColor={FilterColor.host}
-//             hoverColor={ToggleHoverColor.host}
-//           />
