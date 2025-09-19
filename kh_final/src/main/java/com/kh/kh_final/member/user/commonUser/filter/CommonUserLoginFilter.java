@@ -16,6 +16,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
@@ -26,7 +27,7 @@ import java.util.Map;
 public class CommonUserLoginFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper().registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
@@ -37,8 +38,10 @@ public class CommonUserLoginFilter extends UsernamePasswordAuthenticationFilter 
             checkRequest(reqDto);
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(reqDto.getCommonId(), reqDto.getCommonPassword());
             return authenticationManager.authenticate(authToken);
-        } catch (Exception e) {
-            throw new CommonUserException(CommonErrorCode.UNKNOWN_ERROR);
+        } catch (IOException e) {
+            throw new CommonUserException(CommonErrorCode.JSON_PARSE_FAIL);
+        } catch (AuthenticationException e) {
+            throw e;
         }
     }
 
@@ -53,27 +56,28 @@ public class CommonUserLoginFilter extends UsernamePasswordAuthenticationFilter 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        CommonUserRespDto respDto = new CommonUserRespDto();
+        CommonUserRespDto respDto = CommonUserRespDto.from(userDetails);
 
         Map<String, Object> body = new HashMap<>();
         body.put("message", "로그인 성공!");
         body.put("data", respDto);
 
         response.getWriter().write(mapper.writeValueAsString(body));
-
     }
-
 
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
         System.out.println("[CommonUserLoginFilter]: 로그인 실패");
 
-        if(failed instanceof BadCredentialsException){
-            response.addHeader("ErrorCode", CommonErrorCode.PASSWORD_MISMATCH.getMessage());
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        if (failed instanceof BadCredentialsException) {
+            response.addHeader("X-Error-Code", CommonErrorCode.PASSWORD_MISMATCH.getMessage());
+        } else if(failed instanceof UsernameNotFoundException){
+            response.addHeader("X-Error-Code", CommonErrorCode.USER_NOT_FOUND.getMessage());
+        } else {
+            response.addHeader("X-Error-Code", CommonErrorCode.UNKNOWN_ERROR.getMessage());
         }
-
-
     }
 
 
