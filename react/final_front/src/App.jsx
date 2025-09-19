@@ -5,8 +5,8 @@ import AdminMainLayout from './layouts/admin/AdminMainLayout';
 function App() {
   return (
     <>
-      {/* <CommonMainLayout /> */}
-      <HostMainLayout />
+      <CommonMainLayout />
+      {/* <HostMainLayout /> */}
       {/* <AdminMainLayout /> */}
     </>
   );
