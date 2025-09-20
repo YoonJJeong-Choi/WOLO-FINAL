@@ -171,13 +171,13 @@ const FAQ = () => {
         hideFooter
         sx={{ border: 0 }}
       />
-      {/* <BottomSection>
+      <BottomSection>
         <MediumButton
           buttonName="등록"
           buttonColor="#290661"
           hoverColor="#290661"
         />
-      </BottomSection> */}
+      </BottomSection>
     </FAQContainer>
   );
 };
