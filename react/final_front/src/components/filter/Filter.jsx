@@ -14,7 +14,7 @@ import { styled } from '@mui/material/styles';
 //   }
 //   & .MuiSelect-root .MuiOutlinedInput-notchedOutline {
 //     border-color: ${(props) => props.color || '#6C757D'};
-//   }
+//   }S
 // `;
 
 export default function Filter({ labelName, id }) {
@@ -29,9 +29,10 @@ export default function Filter({ labelName, id }) {
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id={id}>{labelName}</InputLabel>
         <Select
+          size="small"
           labelId={id}
           label={labelName}
-          id='demo-simple-select-autowidth'
+          id="demo-simple-select-autowidth"
           value={value}
           onChange={handleChange}
           autoWidth

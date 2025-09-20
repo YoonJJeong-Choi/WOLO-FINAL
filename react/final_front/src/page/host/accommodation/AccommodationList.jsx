@@ -1,21 +1,11 @@
 import HostSubHeader from '../../../layouts/host/header/HostSubHeader';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import Filter from '../../../components/filter/Filter';
 import StatusToggle from '../../../components/filter/StatusToggle';
-import {
-  FilterColor,
-  StatusColor,
-  ToggleHoverColor,
-} from '../../../components/filter/FilterColor';
+import { StatusColor } from '../../../components/filter/FilterColor';
 import ClearButton from '../../../components/buttons/ClearMediumButton';
-import SmallButton from '../../../components/buttons/SmallButton';
-import {
-  ButtonColor,
-  HoverColor,
-} from '../../../components/buttons/ButtonColor';
+import { ButtonColor } from '../../../components/buttons/ButtonColor';
 import DataTable from '../../../components/table/Table';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 const columns = [
   { field: 'no', headerName: '번호', width: 80 },
@@ -80,11 +70,16 @@ const MainDiv = styled('div')`
   background-color: white;
   border-radius: 5px;
   width: 90%;
+  padding: 2%;
 `;
 
-// 가로정렬
+// 가로정렬 , 양끝 정렬, 가로선 맞춤
 const HorizontalDiv = styled('div')`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 2%; */
+  /* margin: 2%; */
 `;
 
 // 세로정렬
@@ -104,13 +99,14 @@ const AccommodationList = () => {
           <StatusToggle backgroundColor={StatusColor.active} />
           <ClearButton buttonColor={ButtonColor.host} buttonName={'삭제'} />
         </HorizontalDiv>
+        <br />
         <DataTable
           columns={columns} // 테이블 컬럼 정의
           rows={rows} // 전체 데이터
           page={page} // 현재 페이지 번호
           pagesize={5} // 한 페이지당 5개씩 보여주기
           onPageChange={setPage} // 페이지 변경 시 실행 (부모 state 변경)
-          checkboxSelection={false} // 체크박스 컬럼 표시 여부 (false: 안 보임)
+          checkboxSelection={true} // 체크박스 컬럼 표시 여부 (false: 안 보임)
           sx={{ border: '1px solid #ddd' }} // 테이블 스타일
           paginationProps={{ color: 'primary', shape: 'rounded' }} // 페이지네이션 스타일
         />
